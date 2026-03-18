@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next Up – Privacy Policy</title>
+  <link rel="stylesheet" href="../../space.css">
+  <style>
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 48px auto;
+      padding: 0 24px;
+      line-height: 1.75;
+    }
+    h1 { font-size: 1.8em; margin-bottom: 4px; color: var(--fg); }
+    h2 { font-size: 1.05em; font-weight: 700; margin-top: 2em; margin-bottom: 0.5em; color: var(--fg); }
+    p, li { font-size: 0.97em; color: var(--mid); }
+    li { margin-left: 1.4em; padding: 2px 0; }
+    .updated { color: var(--dim); font-size: 0.9em; margin-bottom: 2em; }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <canvas id="sf"></canvas>
+  <script>
+  (function(){var c=document.getElementById('sf'),x=c.getContext('2d');
+  function draw(){c.width=innerWidth;c.height=innerHeight;
+  var w=Math.min(c.width*0.65,480),h=w*2.18,l=(c.width-w)/2,t=(c.height-h)/2,s=w*0.115;
+  x.strokeStyle='rgba(255,230,200,0.055)';x.lineWidth=1.5;
+  x.strokeRect(l,t,w,h);
+  x.beginPath();x.moveTo(l,t+h/2);x.lineTo(l+w,t+h/2);x.stroke();
+  x.beginPath();x.moveTo(l+s,t);x.lineTo(l+s,t+h);x.stroke();
+  x.beginPath();x.moveTo(l+w-s,t);x.lineTo(l+w-s,t+h);x.stroke();
+  x.beginPath();x.moveTo(l+s,t+h/2-h*0.21);x.lineTo(l+w-s,t+h/2-h*0.21);x.stroke();
+  x.beginPath();x.moveTo(l+s,t+h/2+h*0.21);x.lineTo(l+w-s,t+h/2+h*0.21);x.stroke();
+  x.beginPath();x.moveTo(l+w/2,t+h/2-h*0.21);x.lineTo(l+w/2,t+h/2+h*0.21);x.stroke();}
+  draw();addEventListener('resize',draw);})();
+  </script>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="../../logo.svg" width="22" height="22" alt="TServe Labs logo">
+      TServe Labs
+    </a>
+    <a href="/next-up/" class="nav-back">← Next Up</a>
+  </nav>
+
+  <div class="content">
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: March 18, 2026</p>
+
+    <p>Next Up ("the service") sends automated SMS notifications to club members about their upcoming court reservations. This policy explains what information is collected, how it is used, and your rights.</p>
+
+    <h2>1. Information We Collect</h2>
+    <p>To operate the service, we collect and store the following information for each enrolled member:</p>
+    <ul>
+      <li>Name</li>
+      <li>Mobile phone number</li>
+    </ul>
+    <p>All enrollment is opt-in. No information is collected from individuals who have not chosen to participate.</p>
+
+    <h2>2. How We Use Your Information</h2>
+    <p>Your information is used solely to operate the Next Up service:</p>
+    <ul>
+      <li>Your phone number is used to identify you with the club software and to send you SMS reminders before your court reservations.</li>
+    </ul>
+
+    <h2>3. SMS Messages</h2>
+    <p>By enrolling in the service, you consent to receive automated SMS messages from TServe Labs. These messages include reminders sent approximately 2 hours before each court reservation.</p>
+    <p>Message and data rates from your mobile carrier may apply.</p>
+
+    <h2>4. Data Sharing</h2>
+    <p>We do not sell, rent, or share your personal information with any third parties. Your data is never used for advertising or marketing purposes.</p>
+    <p>SMS messages are delivered via <strong>Telnyx</strong>, a third-party SMS carrier. Telnyx receives your phone number solely for the purpose of delivering messages. Their handling of this data is governed by <a href="https://telnyx.com/privacy-policy" target="_blank">Telnyx's Privacy Policy</a>.</p>
+
+    <h2>5. Data Retention</h2>
+    <p>Your information is retained for as long as you are an active participant in the service. If you opt out, your personal data will be removed from the service configuration.</p>
+
+    <h2>6. Your Rights</h2>
+    <p>You may opt out of the service at any time. To do so, or to request access to or deletion of your data, contact the club administrator who manages Next Up.</p>
+
+    <h2>7. Changes to This Policy</h2>
+    <p>This policy may be updated from time to time. The "Last updated" date at the top of this page reflects the most recent revision.</p>
+
+    <h2>8. Contact</h2>
+    <p>If you have questions about this privacy policy, please open an issue at <a href="http://github.com/ycombinator/gsl/issues" target="_blank">github.com/ycombinator/gsl</a>.</p>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 TServe Labs</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Net Results – USTA NorCal Tennis League Companion</title>
+  <link rel="stylesheet" href="../space.css">
+  <style>
+    /* Net Results keeps its green tennis accent on the space background */
+    .section-label { color: var(--green); }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 60px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -60%);
+      width: 700px; height: 500px;
+      background: radial-gradient(ellipse, rgba(52,199,89,0.1) 0%, rgba(52,199,89,0.04) 50%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero .badge {
+      display: inline-block;
+      background: rgba(52,199,89,0.12);
+      border: 1px solid rgba(52,199,89,0.35);
+      color: var(--green);
+      font-size: 0.78em;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2em, 6vw, 3.8em);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span { color: var(--green); }
+
+    .hero p {
+      font-size: clamp(1em, 2.5vw, 1.25em);
+      color: var(--mid);
+      max-width: 560px;
+      margin: 0 auto 36px;
+    }
+
+    .app-store-btn {
+      display: inline-block;
+      background: var(--green);
+      color: #000;
+      font-weight: 600;
+      font-size: 1em;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .app-store-btn:hover { opacity: 0.85; }
+
+    /* ── PHONE STRIP ── */
+    .phones {
+      padding: 60px 24px;
+      background: rgba(30,12,4,0.5);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .phones-inner {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .phone-frame { width: 180px; flex-shrink: 0; }
+
+    .phone-frame img {
+      width: 100%;
+      border-radius: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      display: block;
+    }
+
+    /* ── FEATURES ── */
+    .features {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-title {
+      color: var(--fg);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    .feature-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      backdrop-filter: blur(8px);
+    }
+
+    .feature-icon { font-size: 2em; margin-bottom: 16px; }
+
+    .feature-card h3 {
+      font-size: 1.1em;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--fg);
+    }
+
+    .feature-card p { font-size: 0.95em; color: var(--mid); }
+
+    /* ── SHOWCASE ROWS ── */
+    .showcase {
+      padding: 60px 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .showcase.dark-bg {
+      background: rgba(30,12,4,0.55);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .showcase-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .showcase-inner.reverse { flex-direction: row-reverse; }
+
+    .showcase-text { flex: 1; min-width: 260px; }
+    .showcase-text h2 {
+      font-size: clamp(1.4em, 3vw, 2em);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      color: var(--fg);
+    }
+    .showcase-text p { font-size: 1em; color: var(--mid); margin-bottom: 12px; }
+    .showcase-text ul { list-style: none; padding: 0; }
+    .showcase-text ul li { font-size: 0.95em; color: var(--mid); padding: 4px 0; }
+    .showcase-text ul li::before { content: "✓ "; color: var(--green); font-weight: 700; }
+
+    .showcase-img { flex-shrink: 0; width: 200px; }
+    .showcase-img img {
+      width: 100%;
+      border-radius: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    /* ── PRICING ── */
+    .pricing {
+      text-align: center;
+      padding: 80px 24px;
+      background: rgba(30,12,4,0.6);
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .pricing h2 {
+      font-size: clamp(1.6em, 4vw, 2.4em);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      color: var(--fg);
+    }
+
+    .pricing > p { color: var(--mid); max-width: 480px; margin: 0 auto 40px; }
+
+    .pricing-cards {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 32px;
+      flex: 1;
+      min-width: 240px;
+      text-align: left;
+    }
+
+    .pricing-card.featured {
+      background: var(--green);
+      border-color: var(--green);
+      color: #000;
+    }
+
+    .pricing-card .plan-name {
+      font-size: 0.82em;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 10px;
+    }
+
+    .pricing-card .plan-price { font-size: 2em; font-weight: 700; margin-bottom: 6px; color: var(--fg); }
+    .pricing-card.featured .plan-price { color: #000; }
+    .pricing-card .plan-period { font-size: 0.85em; opacity: 0.65; margin-bottom: 24px; color: var(--mid); }
+    .pricing-card.featured .plan-period { color: #000; }
+    .pricing-card ul { list-style: none; padding: 0; }
+    .pricing-card ul li { font-size: 0.92em; padding: 5px 0; opacity: 0.85; color: var(--mid); }
+    .pricing-card.featured ul li { color: #000; }
+    .pricing-card ul li::before { content: "✓ "; font-weight: 700; }
+
+    @media (max-width: 600px) {
+      .phone-frame { width: 140px; }
+      .showcase-img { width: 160px; margin: 0 auto; }
+      .showcase-inner, .showcase-inner.reverse { flex-direction: column; align-items: center; }
+      .showcase-text { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="sf"></canvas>
+  <script>
+  (function(){var c=document.getElementById('sf'),x=c.getContext('2d');
+  function draw(){c.width=innerWidth;c.height=innerHeight;
+  var w=Math.min(c.width*0.65,480),h=w*2.18,l=(c.width-w)/2,t=(c.height-h)/2,s=w*0.115;
+  x.strokeStyle='rgba(255,230,200,0.055)';x.lineWidth=1.5;
+  x.strokeRect(l,t,w,h);
+  x.beginPath();x.moveTo(l,t+h/2);x.lineTo(l+w,t+h/2);x.stroke();
+  x.beginPath();x.moveTo(l+s,t);x.lineTo(l+s,t+h);x.stroke();
+  x.beginPath();x.moveTo(l+w-s,t);x.lineTo(l+w-s,t+h);x.stroke();
+  x.beginPath();x.moveTo(l+s,t+h/2-h*0.21);x.lineTo(l+w-s,t+h/2-h*0.21);x.stroke();
+  x.beginPath();x.moveTo(l+s,t+h/2+h*0.21);x.lineTo(l+w-s,t+h/2+h*0.21);x.stroke();
+  x.beginPath();x.moveTo(l+w/2,t+h/2-h*0.21);x.lineTo(l+w/2,t+h/2+h*0.21);x.stroke();}
+  draw();addEventListener('resize',draw);})();
+  </script>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="../logo.svg" width="22" height="22" alt="TServe Labs logo">
+      TServe Labs
+    </a>
+    <a href="/" class="nav-back">← All Projects</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="badge">iOS App</div>
+    <h1>Your USTA NorCal league,<br><span>always in your pocket.</span></h1>
+    <p>Net Results is the companion app for USTA NorCal tennis league players. Rosters, ratings, schedules, scores — all in one place.</p>
+    <a href="#" class="app-store-btn">Download on the App Store</a>
+  </section>
+
+  <!-- PHONE STRIP -->
+  <section class="phones">
+    <div class="phones-inner">
+      <div class="phone-frame"><img src="screenshots/01-home.png" alt="Home screen"></div>
+      <div class="phone-frame"><img src="screenshots/04-team.png" alt="Team view"></div>
+      <div class="phone-frame"><img src="screenshots/07-team-roster.png" alt="Team roster"></div>
+      <div class="phone-frame"><img src="screenshots/06-team-result-expanded.png" alt="Match result"></div>
+    </div>
+  </section>
+
+  <!-- FEATURE CARDS -->
+  <section class="features">
+    <p class="section-label">Features</p>
+    <h2 class="section-title">Everything your league season needs</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎾</div>
+        <h3>Your Profile</h3>
+        <p>See all your current, upcoming, and past league teams the moment you open the app. TennisRecord and UTR ratings displayed front and center.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>Roster &amp; Ratings</h3>
+        <p>Browse your full team roster with TennisRecord and UTR ratings under every name. Sort by rating to plan your lineup before match day.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3>Schedule &amp; Scores</h3>
+        <p>Upcoming matches with time, location, and match notes. Tap any result to see the full line-by-line scorecard with player ratings.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✅</div>
+        <h3>Availability</h3>
+        <p>Mark your availability for each match date directly in the app — no more replying to group texts.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📤</div>
+        <h3>Lineup Sharing</h3>
+        <p>Send your lineup to the opposing captain and receive theirs — all without leaving the app.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <h3>Enter &amp; Verify Scores</h3>
+        <p>Submit match scores and verify your opponent's scores after match day — right from your phone.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE: PROFILE -->
+  <section class="showcase dark-bg">
+    <div class="showcase-inner">
+      <div class="showcase-text">
+        <h2>All your teams, one view</h2>
+        <p>Log in with your USTA NorCal account and instantly see every team you're on — current, upcoming, and past seasons.</p>
+        <ul>
+          <li>Win–loss record at a glance</li>
+          <li>Next match date and opponent shown on each card</li>
+          <li>TennisRecord, UTR-S, and UTR-D ratings on your profile</li>
+          <li>Tap any team to dive deeper</li>
+        </ul>
+      </div>
+      <div class="showcase-img">
+        <img src="screenshots/03-home-team-expanded.png" alt="Profile with teams expanded">
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE: ROSTER -->
+  <section class="showcase">
+    <div class="showcase-inner reverse">
+      <div class="showcase-text">
+        <h2>Know who you're playing with — and against</h2>
+        <p>The full roster with TennisRecord and UTR ratings for every player. Tap any player to see their match history and individual record.</p>
+        <ul>
+          <li>Sort by name, TennisRecord, or UTR</li>
+          <li>View opponent rosters before match day</li>
+          <li>See win–loss record and match results per player</li>
+        </ul>
+      </div>
+      <div class="showcase-img">
+        <img src="screenshots/08-team-roster-player-expanded.png" alt="Roster with player expanded">
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE: RESULTS -->
+  <section class="showcase dark-bg">
+    <div class="showcase-inner">
+      <div class="showcase-text">
+        <h2>Every score, every line</h2>
+        <p>Tap any match result to see the full scorecard — who played each line, who they played against, the score, and everyone's ratings.</p>
+        <ul>
+          <li>Line-by-line match results</li>
+          <li>TennisRecord and UTR shown for all four players on each line</li>
+          <li>Enter and verify scores after match day</li>
+        </ul>
+      </div>
+      <div class="showcase-img">
+        <img src="screenshots/06-team-result-expanded.png" alt="Match result expanded">
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE: AVAILABILITY -->
+  <section class="showcase">
+    <div class="showcase-inner reverse">
+      <div class="showcase-text">
+        <h2>Never miss a match day detail</h2>
+        <p>Upcoming matches show the time, location, match notes from your captain, and a place to mark your availability — all in one tap.</p>
+        <ul>
+          <li>Match notes and gate codes from your captain</li>
+          <li>Mark Yes, No, Maybe, or Call Last</li>
+          <li>Home or Away indicator</li>
+        </ul>
+      </div>
+      <div class="showcase-img">
+        <img src="screenshots/05-team-upcoming-expanded.png" alt="Upcoming match expanded">
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE: SETTINGS -->
+  <section class="showcase dark-bg">
+    <div class="showcase-inner">
+      <div class="showcase-text">
+        <h2>Your ratings, your way</h2>
+        <p>Choose exactly which ratings appear throughout the app — TennisRecord, UTR Singles, UTR Doubles, and ratings in match results are all independently toggleable.</p>
+        <ul>
+          <li>Toggle TennisRecord ratings on or off</li>
+          <li>Show or hide UTR Singles and Doubles ratings</li>
+          <li>Control whether ratings appear in match scorecards</li>
+          <li>UTR options auto-disable if you skip UTR sign-in</li>
+        </ul>
+      </div>
+      <div class="showcase-img">
+        <img src="screenshots/02-settings.png" alt="Settings view">
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing">
+    <h2>Free to download</h2>
+    <p>Net Results is free with occasional ads. Subscribe annually to remove them and enjoy an uninterrupted experience.</p>
+    <div class="pricing-cards">
+      <div class="pricing-card">
+        <div class="plan-name">Free</div>
+        <div class="plan-price">$0</div>
+        <div class="plan-period">forever</div>
+        <ul>
+          <li>All features included</li>
+          <li>Occasional ads</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <div class="plan-name">Ad-Free</div>
+        <div class="plan-price">$8.99</div>
+        <div class="plan-period">per year</div>
+        <ul>
+          <li>All features included</li>
+          <li>No ads, ever</li>
+          <li>Cancel anytime</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Net Results is an independent app and is not affiliated with or endorsed by USTA.</p>
+    <p style="margin-top: 8px;">
+      <a href="privacy/">Privacy Policy</a> &nbsp;·&nbsp;
+      <a href="http://github.com/ycombinator/gsl/issues">Support</a>
+    </p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next Up – TServe Labs</title>
+  <link rel="stylesheet" href="../space.css">
+  <style>
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 90px 24px 70px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -55%);
+      width: 600px; height: 400px;
+      background: radial-gradient(ellipse, rgba(194,98,45,0.08) 0%, rgba(201,229,42,0.04) 50%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero .eyebrow {
+      display: inline-block;
+      background: rgba(56,189,248,0.1);
+      border: 1px solid rgba(56,189,248,0.3);
+      color: var(--sky);
+      font-size: 0.78em;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 20px;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2em, 5.5vw, 3.8em);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--sky), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: clamp(1em, 2.5vw, 1.2em);
+      color: var(--mid);
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-it-works {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .step {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(129,140,248,0.12);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1em;
+      margin-bottom: 16px;
+    }
+
+    .step h3 {
+      font-size: 1em;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--fg);
+    }
+
+    .step p {
+      font-size: 0.9em;
+      color: var(--mid);
+    }
+
+    /* ── FEATURES ── */
+    .features {
+      padding: 80px 24px;
+      background: rgba(30,12,4,0.5);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .features-inner {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      backdrop-filter: blur(8px);
+    }
+
+    .feature-icon {
+      font-size: 1.8em;
+      margin-bottom: 14px;
+    }
+
+    .feature-card h3 {
+      font-size: 1em;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--fg);
+    }
+
+    .feature-card p {
+      font-size: 0.9em;
+      color: var(--mid);
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="sf"></canvas>
+  <script>
+  (function(){var c=document.getElementById('sf'),x=c.getContext('2d');
+  function draw(){c.width=innerWidth;c.height=innerHeight;
+  var w=Math.min(c.width*0.65,480),h=w*2.18,l=(c.width-w)/2,t=(c.height-h)/2,s=w*0.115;
+  x.strokeStyle='rgba(255,230,200,0.055)';x.lineWidth=1.5;
+  x.strokeRect(l,t,w,h);
+  x.beginPath();x.moveTo(l,t+h/2);x.lineTo(l+w,t+h/2);x.stroke();
+  x.beginPath();x.moveTo(l+s,t);x.lineTo(l+s,t+h);x.stroke();
+  x.beginPath();x.moveTo(l+w-s,t);x.lineTo(l+w-s,t+h);x.stroke();
+  x.beginPath();x.moveTo(l+s,t+h/2-h*0.21);x.lineTo(l+w-s,t+h/2-h*0.21);x.stroke();
+  x.beginPath();x.moveTo(l+s,t+h/2+h*0.21);x.lineTo(l+w-s,t+h/2+h*0.21);x.stroke();
+  x.beginPath();x.moveTo(l+w/2,t+h/2-h*0.21);x.lineTo(l+w/2,t+h/2+h*0.21);x.stroke();}
+  draw();addEventListener('resize',draw);})();
+  </script>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="../logo.svg" width="22" height="22" alt="TServe Labs logo">
+      TServe Labs
+    </a>
+    <a href="/" class="nav-back">← All Projects</a>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">Automation Service</div>
+    <h1>Never miss<br><em>your court time.</em></h1>
+    <p>Next Up automatically sends SMS notifications to club members before their court reservations — so no one forgets, shows up late, or misses their window to cancel.</p>
+  </section>
+
+  <section class="how-it-works">
+    <p class="section-label">How it works</p>
+    <h2 class="section-title">Simple, automatic, reliable</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Reservations synced</h3>
+        <p>The service continuously monitors the club's reservation system for upcoming court bookings.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Reminder sent</h3>
+        <p>Members receive a personalized SMS before their reservation with their court number, time, and date.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>All set</h3>
+        <p>Members arrive on time, cancel if needed, and courts don't go to waste — no one has to remember to check their calendar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="features-inner">
+      <p class="section-label">Features</p>
+      <h2 class="section-title">Built for club operations</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⏰</div>
+          <h3>Timely Reminders</h3>
+          <p>Reminders arrive with enough lead time to prepare, cancel if needed, or make arrangements — but not so early they're forgotten.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔗</div>
+          <h3>Back-to-Back Merging</h3>
+          <p>Consecutive court slots for the same member are automatically merged into a single reminder with the full block duration.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3>Personalized Messages</h3>
+          <p>Each SMS is addressed to the member by name and includes their specific court number, date, and time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 TServe Labs &nbsp;·&nbsp; <a href="privacy/">Privacy Policy</a> &nbsp;·&nbsp; <a href="http://github.com/ycombinator/gsl/issues">Support</a></p>
+  </footer>
+
+</body>
+</html>

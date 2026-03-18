@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TServe Labs</title>
+  <link rel="stylesheet" href="space.css">
+  <style>
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 110px 24px 90px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(194,98,45,0.1) 0%, rgba(201,229,42,0.04) 45%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero .eyebrow {
+      display: inline-block;
+      background: rgba(201,229,42,0.1);
+      border: 1px solid rgba(201,229,42,0.3);
+      color: var(--accent);
+      font-size: 0.78em;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 20px;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4em, 6vw, 4.2em);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 22px;
+      color: var(--fg);
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--accent), var(--glow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .tagline {
+      font-size: clamp(1em, 2.5vw, 1.25em);
+      font-style: italic;
+      color: var(--fg);
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: clamp(1em, 2.5vw, 1.2em);
+      color: var(--mid);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── PROJECTS ── */
+    .projects {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 80px 24px 100px;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 28px;
+    }
+
+    .project-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      backdrop-filter: blur(8px);
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(201,229,42,0.4);
+      box-shadow: 0 0 40px rgba(201,229,42,0.06), 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .project-icon {
+      font-size: 2.2em;
+      margin-bottom: 18px;
+    }
+
+    .project-tag {
+      display: inline-block;
+      font-size: 0.72em;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(201,229,42,0.1);
+      border-radius: 6px;
+      padding: 3px 10px;
+      margin-bottom: 14px;
+    }
+
+    .project-card h2 {
+      font-size: 1.5em;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      color: var(--fg);
+    }
+
+    .project-card > p {
+      font-size: 0.97em;
+      color: var(--mid);
+      flex: 1;
+      margin-bottom: 28px;
+    }
+
+    .project-features {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 32px;
+    }
+
+    .project-features li {
+      font-size: 0.9em;
+      color: var(--dim);
+      padding: 3px 0;
+    }
+
+    .project-features li::before {
+      content: "→ ";
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.92em;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .project-link::after { content: " →"; }
+
+    @media (max-width: 500px) {
+      .project-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="sf"></canvas>
+  <script>
+  (function(){var c=document.getElementById('sf'),x=c.getContext('2d');
+  function draw(){c.width=innerWidth;c.height=innerHeight;
+  var w=Math.min(c.width*0.65,480),h=w*2.18,l=(c.width-w)/2,t=(c.height-h)/2,s=w*0.115;
+  x.strokeStyle='rgba(255,230,200,0.055)';x.lineWidth=1.5;
+  x.strokeRect(l,t,w,h);
+  x.beginPath();x.moveTo(l,t+h/2);x.lineTo(l+w,t+h/2);x.stroke();
+  x.beginPath();x.moveTo(l+s,t);x.lineTo(l+s,t+h);x.stroke();
+  x.beginPath();x.moveTo(l+w-s,t);x.lineTo(l+w-s,t+h);x.stroke();
+  x.beginPath();x.moveTo(l+s,t+h/2-h*0.21);x.lineTo(l+w-s,t+h/2-h*0.21);x.stroke();
+  x.beginPath();x.moveTo(l+s,t+h/2+h*0.21);x.lineTo(l+w-s,t+h/2+h*0.21);x.stroke();
+  x.beginPath();x.moveTo(l+w/2,t+h/2-h*0.21);x.lineTo(l+w/2,t+h/2+h*0.21);x.stroke();}
+  draw();addEventListener('resize',draw);})();
+  </script>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="logo.svg" width="22" height="22" alt="TServe Labs logo">
+      TServe Labs
+    </a>
+  </nav>
+
+  <section class="hero">
+    <h1>Software for<br><em>the tennis community.</em></h1>
+    <p class="tagline">Where tennis meets tech—served to the T.</p>
+    <p>TServe Labs builds focused apps and tools for tennis players and clubs — solving practical problems for real communities.</p>
+  </section>
+
+  <section class="projects">
+    <p class="section-label">Products</p>
+    <h2 class="section-title">What we're building</h2>
+    <div class="project-grid">
+
+      <a href="net-results/" class="project-card">
+        <div class="project-icon">🎾</div>
+        <span class="project-tag">iOS App</span>
+        <h2>Net Results</h2>
+        <p>A companion app for USTA NorCal tennis league players. Rosters, ratings, schedules, and scores — all in one place, always in your pocket.</p>
+        <ul class="project-features">
+          <li>Team rosters with TennisRecord &amp; UTR ratings</li>
+          <li>Schedules, scores &amp; full scorecards</li>
+          <li>Availability &amp; lineup sharing</li>
+
+        </ul>
+        <span class="project-link">Learn more</span>
+      </a>
+
+      <a href="next-up/" class="project-card">
+        <div class="project-icon">📱</div>
+        <span class="project-tag">Automation</span>
+        <h2>Next Up</h2>
+        <p>An automated SMS reminder service for club members, sending timely notifications before court reservations so no one misses their court time.</p>
+        <ul class="project-features">
+          <li>SMS reminders ~2 hours before reservations</li>
+          <li>Back-to-back slots merged into one alert</li>
+          <li>Personalized messages with court &amp; time details</li>
+        </ul>
+        <span class="project-link">Learn more</span>
+      </a>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 TServe Labs</p>
+  </footer>
+
+</body>
+</html>

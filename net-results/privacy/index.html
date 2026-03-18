@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Net Results – Privacy Policy</title>
+  <link rel="stylesheet" href="../../space.css">
+  <style>
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 48px auto;
+      padding: 0 24px;
+      line-height: 1.75;
+    }
+    h1 { font-size: 1.8em; margin-bottom: 4px; color: var(--fg); }
+    h2 { font-size: 1.05em; font-weight: 700; margin-top: 2em; margin-bottom: 0.5em; color: var(--fg); }
+    p, li { font-size: 0.97em; color: var(--mid); }
+    li { margin-left: 1.4em; padding: 2px 0; }
+    .updated { color: var(--dim); font-size: 0.9em; margin-bottom: 2em; }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <canvas id="sf"></canvas>
+  <script>
+  (function(){var c=document.getElementById('sf'),x=c.getContext('2d');
+  function draw(){c.width=innerWidth;c.height=innerHeight;
+  var w=Math.min(c.width*0.65,480),h=w*2.18,l=(c.width-w)/2,t=(c.height-h)/2,s=w*0.115;
+  x.strokeStyle='rgba(255,230,200,0.055)';x.lineWidth=1.5;
+  x.strokeRect(l,t,w,h);
+  x.beginPath();x.moveTo(l,t+h/2);x.lineTo(l+w,t+h/2);x.stroke();
+  x.beginPath();x.moveTo(l+s,t);x.lineTo(l+s,t+h);x.stroke();
+  x.beginPath();x.moveTo(l+w-s,t);x.lineTo(l+w-s,t+h);x.stroke();
+  x.beginPath();x.moveTo(l+s,t+h/2-h*0.21);x.lineTo(l+w-s,t+h/2-h*0.21);x.stroke();
+  x.beginPath();x.moveTo(l+s,t+h/2+h*0.21);x.lineTo(l+w-s,t+h/2+h*0.21);x.stroke();
+  x.beginPath();x.moveTo(l+w/2,t+h/2-h*0.21);x.lineTo(l+w/2,t+h/2+h*0.21);x.stroke();}
+  draw();addEventListener('resize',draw);})();
+  </script>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="../../logo.svg" width="22" height="22" alt="TServe Labs logo">
+      TServe Labs
+    </a>
+    <a href="/net-results/" class="nav-back">← Net Results</a>
+  </nav>
+
+  <div class="content">
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: March 14, 2026</p>
+
+    <p>Net Results ("the app") is a companion app for USTA NorCal tennis league players. This policy explains what information is collected, how it is used, and your choices.</p>
+
+    <h2>1. Information You Provide</h2>
+    <p>The app asks you to sign in with your USTA NorCal account credentials (username and password). These credentials are used solely to authenticate with the USTA NorCal website on your behalf. They are stored locally on your device and are never transmitted to any server operated by Net Results.</p>
+
+    <h2>2. Information Collected Automatically</h2>
+    <p>The app uses <strong>Google AdMob</strong> to display banner advertisements to free users. AdMob may collect the following data automatically:</p>
+    <ul>
+      <li>Device identifiers (e.g. advertising ID)</li>
+      <li>App usage and interaction data</li>
+      <li>IP address and general location (country/region)</li>
+      <li>Device type, operating system version, and language</li>
+    </ul>
+    <p>This data is collected and processed by Google in accordance with <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>. Net Results does not have access to or control over this data.</p>
+    <p>Ads are not shown to users who have an active ad-free subscription.</p>
+
+    <h2>3. In-App Purchases</h2>
+    <p>The app offers an optional annual subscription to remove ads. All purchases are processed by Apple through the App Store. Net Results does not collect or store any payment information. Apple's handling of purchase data is governed by <a href="https://www.apple.com/legal/privacy/" target="_blank">Apple's Privacy Policy</a>.</p>
+
+    <h2>4. Data Sharing</h2>
+    <p>Net Results does not sell, rent, or share your personal information with third parties, except as described above (Google AdMob for advertising).</p>
+
+    <h2>5. Data Retention</h2>
+    <p>Your USTA NorCal credentials are stored locally on your device. You can remove them at any time by logging out of the app or deleting the app.</p>
+
+    <h2>6. Children's Privacy</h2>
+    <p>The app is not directed at children under 13 and does not knowingly collect personal information from children.</p>
+
+    <h2>7. Changes to This Policy</h2>
+    <p>This policy may be updated from time to time. The "Last updated" date at the top of this page reflects the most recent revision. Continued use of the app after changes constitutes acceptance of the updated policy.</p>
+
+    <h2>8. Contact</h2>
+    <p>If you have questions about this privacy policy, please open an issue at <a href="http://github.com/ycombinator/gsl/issues" target="_blank">github.com/ycombinator/gsl</a>.</p>
+  </div>
+
+  <footer>
+    <p>Net Results is an independent app and is not affiliated with or endorsed by USTA.</p>
+  </footer>
+
+</body>
+</html>
