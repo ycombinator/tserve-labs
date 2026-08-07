@@ -1,0 +1,214 @@
+:root {
+  --court:  #180a04;
+  --panel:  #200e06;
+  --accent: #c9e52a;
+  --glow:   #f97316;
+  --fg:     #faf5ee;
+  --mid:    rgba(250,245,238,0.75);
+  --dim:    rgba(250,245,238,0.50);
+  --border: rgba(194,98,45,0.3);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { background: var(--court); }
+
+body {
+  background: var(--court);
+  padding: 48px 56px;
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 11pt;
+  line-height: 1.6;
+}
+
+/* ── Links — matches site: accent color, no underline ── */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ── Document header — title left, doc type right, same baseline ── */
+.doc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.doc-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 2em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
+
+.doc-type {
+  font-size: 1.1em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+/* ── Fallback h1 for other docs ── */
+h1 {
+  font-size: 2em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  margin-bottom: 4px;
+}
+
+h1 + p > em:only-child {
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-style: normal;
+}
+
+/* ── Section headings (h2) — project-tag style ── */
+h2 {
+  counter-reset: step;
+  display: block;
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(201,229,42,0.1);
+  border-radius: 6px;
+  padding: 3px 10px;
+  margin-top: 32px;
+  margin-bottom: 6px;
+}
+
+/* ── Sub-headings (h3) — numbered circles in accent color ── */
+h3 {
+  font-size: 1em;
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: 20px;
+  margin-bottom: 6px;
+  padding-left: 10px;
+  counter-increment: step;
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+}
+
+h2 + h3 { margin-top: 8px; }
+
+h3::before {
+  content: counter(step);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.55em;
+  height: 1.55em;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--court);
+  font-size: 0.78em;
+  font-weight: 700;
+}
+
+/* ── Body text ── */
+p { margin-bottom: 10px; padding-left: 10px; }
+
+/* ── Horizontal rule ── */
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 20px 0;
+}
+
+/* Title / body divider — heavier, accent color */
+hr:first-of-type {
+  border-top: 2px solid var(--accent);
+  margin-top: 2px;
+  margin-bottom: 28px;
+}
+
+/* ── Lists — arrow bullets matching website ── */
+ul {
+  list-style: none;
+  padding-left: 10px;
+  margin-bottom: 12px;
+}
+
+ol {
+  list-style: none;
+  padding-left: 10px;
+  counter-reset: step;
+  margin-bottom: 12px;
+}
+
+ol li {
+  counter-increment: step;
+  padding-left: 2.2em;
+}
+
+ol li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.05em;
+  width: 1.55em;
+  height: 1.55em;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--court);
+  font-size: 0.78em;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+li {
+  margin-bottom: 5px;
+  padding-left: 1.4em;
+  position: relative;
+}
+
+ul li::before {
+  content: "→";
+  color: var(--accent);
+  position: absolute;
+  left: 0;
+}
+
+li > strong { color: var(--accent); }
+
+/* ── Bold ── */
+strong { font-weight: 600; }
+
+/* ── Contact block ── */
+.contact-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+  padding-left: 10px;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.95em;
+}
+
+.contact-link svg {
+  flex-shrink: 0;
+  color: var(--accent);
+}
