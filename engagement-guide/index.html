@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engagement Guide – TServe Labs</title>
+  <meta name="description" content="How TServe Labs works with clients — engagement process, deliverables, communication, and pricing.">
+  <link rel="stylesheet" href="../space.css">
+  <style>
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 90px 24px 70px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -60%);
+      width: 700px; height: 400px;
+      background: radial-gradient(ellipse, rgba(201,229,42,0.07) 0%, rgba(194,98,45,0.04) 50%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero .eyebrow {
+      display: inline-block;
+      background: rgba(201,229,42,0.1);
+      border: 1px solid rgba(201,229,42,0.3);
+      color: var(--accent);
+      font-size: 0.78em;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 20px;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2em, 5.5vw, 3.6em);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+      margin-bottom: 22px;
+      color: var(--fg);
+    }
+
+    .hero p {
+      font-size: clamp(1em, 2.5vw, 1.2em);
+      color: var(--mid);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── PROCESS SECTION ── */
+    .process {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .step {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 32px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      backdrop-filter: blur(8px);
+    }
+
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(201,229,42,0.12);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.9em;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-body h3 {
+      font-size: 1em;
+      font-weight: 700;
+      color: var(--fg);
+      margin-bottom: 8px;
+    }
+
+    .step-body p {
+      font-size: 0.93em;
+      color: var(--mid);
+      line-height: 1.6;
+      margin-bottom: 6px;
+    }
+
+    .step-body p:last-child { margin-bottom: 0; }
+
+    .step-body .note {
+      font-size: 0.85em;
+      color: var(--dim);
+    }
+
+    /* ── ARROW LIST (inside steps) ── */
+    .arrow-list {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .arrow-list li {
+      display: flex;
+      gap: 8px;
+      font-size: 0.93em;
+      color: var(--mid);
+      line-height: 1.5;
+    }
+
+    .arrow-list li::before {
+      content: "→";
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .arrow-list li strong { color: var(--fg); }
+
+    /* ── DARK-BAND SECTIONS ── */
+    .dark-band {
+      padding: 80px 24px;
+      background: rgba(30,12,4,0.5);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dark-band-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* ── DELIVERABLES GRID ── */
+    .deliverables-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .deliverable-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(8px);
+    }
+
+    .deliverable-card .icon {
+      font-size: 1.6em;
+      margin-bottom: 12px;
+    }
+
+    .deliverable-card h3 {
+      font-size: 1em;
+      font-weight: 700;
+      color: var(--fg);
+      margin-bottom: 8px;
+    }
+
+    .deliverable-card p {
+      font-size: 0.9em;
+      color: var(--mid);
+      line-height: 1.55;
+    }
+
+    /* ── LIGHT SECTIONS ── */
+    .light-section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .light-section p {
+      color: var(--mid);
+      line-height: 1.6;
+      font-size: 0.97em;
+      margin-bottom: 10px;
+    }
+
+    .light-section p:last-child { margin-bottom: 0; }
+
+    /* ── DARK-BAND PROSE ── */
+    .dark-band-inner p:not(.section-label) {
+      color: var(--mid);
+      line-height: 1.6;
+      font-size: 0.97em;
+      margin-bottom: 10px;
+    }
+
+    .dark-band-inner p:last-of-type { margin-bottom: 0; }
+
+    .cta-group { margin-top: 56px; }
+
+    /* ── H2 — matches Net Results showcase style ── */
+    h2 {
+      font-size: clamp(1.4em, 3vw, 2em);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      color: var(--fg);
+    }
+
+    /* ── CONTACT ── */
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 1em;
+      transition: opacity 0.15s;
+    }
+
+    .contact-link:hover { opacity: 0.75; }
+    .contact-link svg { flex-shrink: 0; }
+
+  </style>
+</head>
+<body>
+
+  <canvas id="sf"></canvas>
+  <script>
+  (function(){var c=document.getElementById('sf'),x=c.getContext('2d');
+  function draw(){c.width=innerWidth;c.height=innerHeight;
+  var w=Math.min(c.width*0.65,480),h=w*2.18,l=(c.width-w)/2,t=(c.height-h)/2,s=w*0.115;
+  x.strokeStyle='rgba(255,230,200,0.055)';x.lineWidth=1.5;
+  x.strokeRect(l,t,w,h);
+  x.beginPath();x.moveTo(l,t+h/2);x.lineTo(l+w,t+h/2);x.stroke();
+  x.beginPath();x.moveTo(l+s,t);x.lineTo(l+s,t+h);x.stroke();
+  x.beginPath();x.moveTo(l+w-s,t);x.lineTo(l+w-s,t+h);x.stroke();
+  x.beginPath();x.moveTo(l+s,t+h/2-h*0.21);x.lineTo(l+w-s,t+h/2-h*0.21);x.stroke();
+  x.beginPath();x.moveTo(l+s,t+h/2+h*0.21);x.lineTo(l+w-s,t+h/2+h*0.21);x.stroke();
+  x.beginPath();x.moveTo(l+w/2,t+h/2-h*0.21);x.lineTo(l+w/2,t+h/2+h*0.21);x.stroke();}
+  draw();addEventListener('resize',draw);})();
+  </script>
+
+  <nav>
+    <a href="../" class="nav-logo">
+      <img src="../logo.svg" width="22" height="22" alt="TServe Labs logo">
+      TServe Labs
+    </a>
+    <a href="../" class="nav-back">&larr; Home</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="eyebrow">Engagement Guide</div>
+    <h1>How We Work Together</h1>
+    <p>Project-based work with a defined scope, clear deliverables, and a fixed price — all locked in before work begins.</p>
+  </section>
+
+  <!-- ENGAGEMENT PROCESS -->
+  <section class="process">
+    <p class="section-label">The Process</p>
+    <h2>From first conversation to delivery</h2>
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Discovery Call</h3>
+          <p>We start with a conversation — typically an hour. You describe the end result you're trying to achieve and what you've already tried. We ask questions. By the end, we'll know whether it makes sense to work together.</p>
+          <p class="note">There is no charge for this call.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Proposal</h3>
+          <p>If there's a fit, we write a proposal. It covers:</p>
+          <ul class="arrow-list">
+            <li><strong>Scope</strong> — exactly what we will build or deliver</li>
+            <li><strong>What's out of scope</strong> — so there are no misunderstandings later</li>
+            <li><strong>Timeline</strong> — a realistic schedule with milestones</li>
+            <li><strong>Price</strong> — included in the proposal and locked in when you accept it</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Contract</h3>
+          <p>Once the proposal is accepted, we sign a straightforward contract. We then get access to the systems and tools we need and work begins.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Delivery</h3>
+          <p>Work progresses in milestones as defined in the proposal. At each milestone, meaningful functionality has been added and issues addressed — progress is cumulative, building toward the final delivery. The final milestone is the completed project — production-ready and handed off.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>Support <span style="color:var(--dim);font-weight:400">(Optional)</span></h3>
+          <p>After delivery, ongoing support is available at the hourly rate specified in the proposal.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHAT WE DELIVER -->
+  <section class="dark-band">
+    <div class="dark-band-inner">
+      <p class="section-label">Deliverables</p>
+      <h2>What you receive</h2>
+      <div class="deliverables-grid">
+        <div class="deliverable-card">
+          <div class="icon">⚙️</div>
+          <h3>Working software</h3>
+          <p>Production-ready, tested, and deployed.</p>
+        </div>
+        <div class="deliverable-card">
+          <div class="icon">📄</div>
+          <h3>Architecture documentation</h3>
+          <p>Written specs and design decisions so the system is understandable to any future engineer.</p>
+        </div>
+        <div class="deliverable-card">
+          <div class="icon">🤝</div>
+          <h3>A clean handoff</h3>
+          <p>We walk you through the codebase, the infrastructure, and anything else you need to take ownership.</p>
+        </div>
+        <div class="deliverable-card">
+          <div class="icon">🛟</div>
+          <h3>Ongoing support (optional)</h3>
+          <p>Available after delivery at an hourly rate specified in the proposal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW WE WORK -->
+  <section class="light-section">
+    <p class="section-label">Communication</p>
+    <h2>How we work</h2>
+    <p>We prefer asynchronous communication — email and shared documents — with a scheduled sync at each major milestone. If something changes during the project, you hear about it immediately.</p>
+    <p style="margin-top: 24px;">To keep things moving, it helps to have:</p>
+    <ul class="arrow-list" style="margin-top: 10px;">
+      <li><strong>Responsiveness</strong> — prompt decisions and access to relevant people and systems keeps things on track</li>
+      <li><strong>Clear feedback on delivered work</strong> — we will always ask for clarification rather than guess</li>
+    </ul>
+  </section>
+
+  <!-- PRICING + CTA -->
+  <section class="dark-band">
+    <div class="dark-band-inner">
+      <p class="section-label">Pricing</p>
+      <h2>Simple, fixed-price projects</h2>
+      <p>Project work is fixed-price. The price is included in the proposal and does not change once accepted — unless the scope changes, in which case we flag it before proceeding.</p>
+      <p>Post-delivery support is optional and billed at an hourly rate, agreed upfront and included in the proposal.</p>
+
+      <div class="cta-group">
+        <p class="section-label">Get in touch</p>
+        <h2>Ready to start?</h2>
+        <p>Reach out and we'll set up a discovery call.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:admin@tservelabs.com" class="contact-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          admin@tservelabs.com
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 TServe Labs &nbsp;&middot;&nbsp; <a href="mailto:admin@tservelabs.com">Contact</a></p>
+  </footer>
+
+</body>
+</html>
