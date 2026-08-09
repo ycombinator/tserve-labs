@@ -110,10 +110,24 @@
     }
 
     .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      display: flex;
+      flex-direction: column;
       gap: 28px;
     }
+
+    .feature-row {
+      display: grid;
+      gap: 28px;
+      justify-content: center;
+    }
+
+    .feature-row.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      max-width: 700px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .feature-row.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
     .feature-card {
       background: var(--panel);
@@ -246,6 +260,7 @@
       .showcase-img { width: 180px; margin: 0 auto; }
       .showcase-inner, .showcase-inner.reverse { flex-direction: column; align-items: center; }
       .showcase-text { text-align: center; }
+      .feature-row.three, .feature-row.four { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -288,40 +303,44 @@
     <p class="section-label">Features</p>
     <h2 class="section-title">The season, without the scavenger hunt</h2>
     <div class="feature-grid">
-      <div class="feature-card">
+      <div class="feature-row three">
+        <div class="feature-card">
         <div class="feature-icon">🧑</div>
         <h3>Player profiles</h3>
         <p>Open any player’s profile to see their teams, ratings, upcoming matches, and recent results. Export timed upcoming matches as a calendar file.</p>
-      </div>
-      <div class="feature-card">
+        </div>
+        <div class="feature-card">
         <div class="feature-icon">📅</div>
         <h3>Roster &amp; ratings</h3>
         <p>Browse the full roster, sort it by name or rating, and show TennisRecord, UTR Singles, or UTR Doubles where you want them.</p>
-      </div>
-      <div class="feature-card">
+        </div>
+        <div class="feature-card">
         <div class="feature-icon">📋</div>
         <h3>Lineup planner</h3>
         <p>Try availability changes locally, then compare Equal Play and Strongest Lines proposals that respect league and rating constraints.</p>
+        </div>
       </div>
-      <div class="feature-card">
+      <div class="feature-row four">
+        <div class="feature-card">
         <div class="feature-icon">🏆</div>
         <h3>Projected standings</h3>
         <p>See the current table beside an end-of-season projection, with confidence and the expected movement for every team.</p>
-      </div>
-      <div class="feature-card">
+        </div>
+        <div class="feature-card">
         <div class="feature-icon">🎾</div>
         <h3>Match details</h3>
         <p>Upcoming matches keep time, home or away status, location, captain notes, and your availability in one place.</p>
-      </div>
-      <div class="feature-card">
+        </div>
+        <div class="feature-card">
         <div class="feature-icon">🔍</div>
         <h3>Search the league</h3>
         <p>Find players and teams by name, then open their public profiles and team pages. Sign-in is optional for browsing.</p>
-      </div>
-      <div class="feature-card">
+        </div>
+        <div class="feature-card">
         <div class="feature-icon">📤</div>
         <h3>Lineup sharing</h3>
         <p>Share a published lineup with another captain through Messages or a nearby device, right from the match details.</p>
+        </div>
       </div>
     </div>
   </section>
