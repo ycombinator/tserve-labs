@@ -96,58 +96,6 @@
       display: block;
     }
 
-    /* ── FEATURES ── */
-    .features {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 80px 24px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .section-title {
-      color: var(--fg);
-    }
-
-    .feature-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-    }
-
-    .feature-row {
-      display: grid;
-      gap: 28px;
-      justify-content: center;
-    }
-
-    .feature-row.three {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      max-width: 700px;
-      width: 100%;
-      margin: 0 auto;
-    }
-    .feature-row.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-
-    .feature-card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 32px;
-      backdrop-filter: blur(8px);
-    }
-
-    .feature-icon { font-size: 2em; margin-bottom: 16px; }
-
-    .feature-card h3 {
-      font-size: 1.1em;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: var(--fg);
-    }
-
-    .feature-card p { font-size: 0.95em; color: var(--mid); }
-
     /* ── SHOWCASE ROWS ── */
     .showcase {
       padding: 60px 24px;
@@ -191,6 +139,7 @@
       border-radius: 28px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.5);
     }
+
 
     /* ── PRICING ── */
     .pricing {
@@ -260,7 +209,6 @@
       .showcase-img { width: 180px; margin: 0 auto; }
       .showcase-inner, .showcase-inner.reverse { flex-direction: column; align-items: center; }
       .showcase-text { text-align: center; }
-      .feature-row.three, .feature-row.four { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -298,55 +246,8 @@
     <a href="#" class="app-store-btn">Download on the App Store</a>
   </section>
 
-  <!-- FEATURE CARDS -->
-  <section class="features">
-    <p class="section-label">Features</p>
-    <h2 class="section-title">The season, without the scavenger hunt</h2>
-    <div class="feature-grid">
-      <div class="feature-row three">
-        <div class="feature-card">
-        <div class="feature-icon">🧑</div>
-        <h3>Player profiles</h3>
-        <p>Open any player’s profile to see their teams, ratings, upcoming matches, and recent results. Export timed upcoming matches as a calendar file.</p>
-        </div>
-        <div class="feature-card">
-        <div class="feature-icon">📅</div>
-        <h3>Roster &amp; ratings</h3>
-        <p>Browse the full roster, sort it by name or rating, and show TennisRecord, UTR Singles, or UTR Doubles where you want them.</p>
-        </div>
-        <div class="feature-card">
-        <div class="feature-icon">📋</div>
-        <h3>Lineup planner</h3>
-        <p>Try availability changes locally, then compare Equal Play and Strongest Lines proposals that respect league and rating constraints.</p>
-        </div>
-      </div>
-      <div class="feature-row four">
-        <div class="feature-card">
-        <div class="feature-icon">🏆</div>
-        <h3>Projected standings</h3>
-        <p>See the current table beside an end-of-season projection, with confidence and the expected movement for every team.</p>
-        </div>
-        <div class="feature-card">
-        <div class="feature-icon">🎾</div>
-        <h3>Match details</h3>
-        <p>Upcoming matches keep time, home or away status, location, captain notes, and your availability in one place.</p>
-        </div>
-        <div class="feature-card">
-        <div class="feature-icon">🔍</div>
-        <h3>Search the league</h3>
-        <p>Find players and teams by name, then open their public profiles and team pages.</p>
-        </div>
-        <div class="feature-card">
-        <div class="feature-icon">📤</div>
-        <h3>Lineup sharing</h3>
-        <p>Share a published lineup with another captain through Messages or a nearby device, right from the match details.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- SHOWCASE: PROFILE -->
-  <section class="showcase dark-bg">
+  <section id="profile" class="showcase dark-bg">
     <div class="showcase-inner">
       <div class="showcase-text">
         <h2>All your teams, one view</h2>
@@ -365,7 +266,7 @@
   </section>
 
   <!-- SHOWCASE: LINEUP PLANNER -->
-  <section class="showcase">
+  <section id="planner" class="showcase">
     <div class="showcase-inner reverse">
       <div class="showcase-text">
         <h2>Plan a lineup</h2>
@@ -383,7 +284,7 @@
   </section>
 
   <!-- SHOWCASE: STANDINGS -->
-  <section class="showcase dark-bg">
+  <section id="standings" class="showcase dark-bg">
     <div class="showcase-inner">
       <div class="showcase-text">
         <h2>See where the flight is headed</h2>
@@ -401,7 +302,7 @@
   </section>
 
   <!-- SHOWCASE: LINEUP SHARING -->
-  <section class="showcase">
+  <section id="sharing" class="showcase">
     <div class="showcase-inner reverse">
       <div class="showcase-text">
         <h2>Share the lineup in a tap</h2>
@@ -419,7 +320,7 @@
   </section>
 
   <!-- SHOWCASE: ROSTER -->
-  <section class="showcase dark-bg">
+  <section id="roster" class="showcase dark-bg">
     <div class="showcase-inner">
       <div class="showcase-text">
         <h2>Know the roster before match day</h2>
@@ -437,7 +338,7 @@
   </section>
 
   <!-- SHOWCASE: AVAILABILITY -->
-  <section class="showcase">
+  <section id="availability" class="showcase">
     <div class="showcase-inner reverse">
       <div class="showcase-text">
         <h2>Never miss a match day detail</h2>
@@ -473,7 +374,7 @@
   </section>
 
   <!-- SHOWCASE: SEARCH -->
-  <section class="showcase dark-bg">
+  <section id="search" class="showcase dark-bg">
     <div class="showcase-inner reverse">
       <div class="showcase-text">
         <h2>Find a player or team in seconds</h2>
@@ -508,20 +409,20 @@
     </div>
   </section>
 
-  <!-- SHOWCASE: SETTINGS -->
-  <section class="showcase">
+  <!-- SHOWCASE: ACCOUNT CONTROLS -->
+  <section id="account-controls" class="showcase">
     <div class="showcase-inner reverse">
       <div class="showcase-text">
-        <h2>Your ratings, your way</h2>
-        <p>Choose which ratings appear throughout the app — TennisRecord, UTR Singles, UTR Doubles, and scorecard ratings can each be controlled separately.</p>
+        <h2>Keep account access under your control</h2>
+        <p>Manage your USTA NorCal and UTR sessions, ratings, cached data, and protected Face ID sign-in from one clear Settings screen.</p>
         <ul>
-          <li>Sign in to USTA and UTR separately</li>
-          <li>Toggle TennisRecord, UTR-S, and UTR-D</li>
-          <li>Control ratings in match scorecards</li>
+          <li>Turn Face ID off for either account at any time</li>
+          <li>Sign out of USTA and UTR separately</li>
+          <li>Choose which ratings appear throughout the app</li>
         </ul>
       </div>
       <div class="showcase-img">
-        <img src="screenshots/10-settings.png" alt="Settings view">
+        <img src="screenshots/10-settings.png" alt="Settings with Face ID account controls">
       </div>
     </div>
   </section>
