@@ -70,74 +70,230 @@
     }
     .app-store-btn:hover { opacity: 0.85; }
 
-    /* ── PHONE STRIP ── */
-    .phones {
-      padding: 60px 24px;
-      background: rgba(30,12,4,0.5);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      position: relative;
-      z-index: 1;
-    }
-
-    .phones-inner {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .phone-frame { width: 180px; flex-shrink: 0; }
-
-    .phone-frame img {
-      width: 100%;
-      border-radius: 28px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-      display: block;
-    }
-
-    /* ── SHOWCASE ROWS ── */
-    .showcase {
-      padding: 48px 24px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .showcase.dark-bg {
+    /* ── FEATURE CAROUSEL ── */
+    .feature-carousel {
+      padding: 64px 0;
+      overflow: hidden;
       background: rgba(30,12,4,0.55);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
     }
 
-    .showcase-inner {
-      max-width: 900px;
+    .carousel-shell {
+      width: min(100%, 1040px);
       margin: 0 auto;
-      display: flex;
+      padding-left: 24px;
+      display: grid;
+      grid-template-columns: minmax(300px, 1fr) 456px;
       align-items: center;
-      gap: 60px;
-      flex-wrap: wrap;
+      gap: 64px;
     }
 
-    .showcase-inner.reverse { flex-direction: row-reverse; }
+    .carousel-copy-column { min-width: 0; }
+    .carousel-label { text-align: left; margin-bottom: 16px; }
 
-    .showcase-text { flex: 1; min-width: 260px; }
-    .showcase-text h2 {
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .carousel-copy-stage {
+      display: grid;
+      align-items: center;
+    }
+
+    .carousel-copy {
+      grid-area: 1 / 1;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity 260ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 420ms;
+    }
+
+    .carousel-copy.is-active {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+      transition-delay: 120ms;
+    }
+
+    .carousel-copy h2 {
       font-size: clamp(1.4em, 3vw, 2em);
       font-weight: 700;
       letter-spacing: -0.02em;
       margin-bottom: 16px;
       color: var(--fg);
     }
-    .showcase-text p { font-size: 1em; color: var(--mid); margin-bottom: 12px; }
-    .showcase-text ul { list-style: none; padding: 0; }
-    .showcase-text ul li { font-size: 0.95em; color: var(--mid); padding: 4px 0; }
-    .showcase-text ul li::before { content: "✓ "; color: var(--green); font-weight: 700; }
 
-    .showcase-img { flex-shrink: 0; width: 260px; }
-    .showcase-img img {
+    .carousel-copy p { font-size: 1em; color: var(--mid); margin-bottom: 12px; }
+    .carousel-copy ul { list-style: none; padding: 0; }
+    .carousel-copy ul li { font-size: 0.95em; color: var(--mid); padding: 4px 0; }
+    .carousel-copy ul li::before { content: "✓ "; color: var(--green); font-weight: 700; }
+
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .carousel-control,
+    .carousel-play {
+      min-width: 42px;
+      height: 42px;
+      padding: 0 13px;
+      border: 1px solid var(--border);
+      border-radius: 21px;
+      background: rgba(32,14,6,0.9);
+      color: var(--fg);
+      font: inherit;
+      font-size: 0.9em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 160ms ease, background 160ms ease, opacity 160ms ease;
+    }
+
+    .carousel-control {
+      width: 42px;
+      padding: 0;
+      position: relative;
+      font-size: 1.15em;
+    }
+
+    .carousel-countdown {
+      position: absolute;
+      inset: -3px;
+      width: 46px;
+      height: 46px;
+      overflow: visible;
+      pointer-events: none;
+      transform: rotate(-90deg);
+    }
+
+    .carousel-countdown-circle {
+      fill: none;
+      stroke: var(--green);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      opacity: 0;
+    }
+
+    .carousel-control.is-counting .carousel-countdown-circle {
+      opacity: 1;
+      animation: carousel-countdown var(--autoplay-delay) linear forwards;
+    }
+
+    @keyframes carousel-countdown {
+      to { stroke-dashoffset: 0; }
+    }
+
+    .carousel-control:hover,
+    .carousel-play:hover {
+      border-color: rgba(52,199,89,0.65);
+      background: rgba(52,199,89,0.1);
+    }
+
+    .carousel-control:focus-visible,
+    .carousel-play:focus-visible,
+    .carousel-shot:focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: 3px;
+    }
+
+    .carousel-control:disabled {
+      opacity: 0.3;
+      cursor: default;
+      background: rgba(32,14,6,0.9);
+      border-color: var(--border);
+    }
+
+    .carousel-counter {
+      min-width: 64px;
+      text-align: center;
+      color: var(--dim);
+      font-size: 0.84em;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.06em;
+    }
+
+    .carousel-counter-current { color: var(--fg); font-weight: 700; }
+
+    .carousel-progress {
+      width: min(100%, 330px);
+      height: 2px;
+      margin-top: 18px;
+      overflow: hidden;
+      background: var(--border);
+    }
+
+    .carousel-progress-fill {
+      width: calc(100% / 17);
+      height: 100%;
+      background: var(--green);
+      transform-origin: left;
+      transition: width 500ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .carousel-viewport {
+      width: 456px;
+      max-width: 100vw;
+      overflow: hidden;
+      touch-action: pan-y;
+      cursor: grab;
+    }
+
+    .carousel-viewport.is-dragging { cursor: grabbing; }
+
+    .carousel-track {
+      --shot-width: 260px;
+      --shot-gap: 20px;
+      display: flex;
+      align-items: center;
+      gap: var(--shot-gap);
+      width: max-content;
+      transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+
+    .carousel-track.is-jumping,
+    .carousel-track.is-dragging { transition: none; }
+
+    .carousel-shot {
+      width: var(--shot-width);
+      flex: 0 0 var(--shot-width);
+      padding: 0;
+      border: 0;
+      border-radius: 28px;
+      background: transparent;
+      opacity: 0.08;
+      filter: saturate(0.65);
+      cursor: pointer;
+      transition: opacity 500ms ease, filter 500ms ease;
+    }
+
+    .carousel-shot.is-neighbor { opacity: 0.42; }
+    .carousel-shot.is-active { opacity: 1; filter: none; cursor: default; }
+
+    .carousel-shot img {
       width: 100%;
+      height: auto;
       border-radius: 28px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      display: block;
+      pointer-events: none;
     }
 
 
@@ -204,11 +360,49 @@
     .pricing-card.featured ul li { color: #000; }
     .pricing-card ul li::before { content: "✓ "; font-weight: 700; }
 
-    @media (max-width: 600px) {
-      .phone-frame { width: 140px; }
-      .showcase-img { width: 180px; margin: 0 auto; }
-      .showcase-inner, .showcase-inner.reverse { flex-direction: column; align-items: center; gap: 32px; }
-      .showcase-text { text-align: center; }
+    @media (max-width: 900px) {
+      .feature-carousel { padding: 48px 0 56px; }
+
+      .carousel-shell {
+        width: 100%;
+        padding-left: 0;
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .carousel-copy-stage,
+      .carousel-controls,
+      .carousel-progress {
+        margin-left: 24px;
+        margin-right: 24px;
+      }
+
+      .carousel-label { text-align: center; }
+      .carousel-copy { text-align: center; }
+      .carousel-copy ul { display: inline-block; text-align: left; }
+      .carousel-controls { justify-content: center; }
+      .carousel-progress { width: auto; }
+
+      .carousel-viewport {
+        width: min(100vw, 456px);
+        margin: 0 auto;
+      }
+
+      .carousel-track {
+        --shot-width: clamp(182.5px, calc(62.5vw - 17.5px), 267.5px);
+        --shot-gap: 14px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .carousel-copy,
+      .carousel-track,
+      .carousel-shot,
+      .carousel-progress-fill {
+        transition: none;
+      }
+
+      .carousel-countdown-circle { animation: none !important; }
     }
   </style>
 </head>
@@ -246,10 +440,13 @@
     <a href="#" class="app-store-btn">Download on the App Store</a>
   </section>
 
-  <!-- SHOWCASE: HOME -->
-  <section id="home" class="showcase">
-    <div class="showcase-inner reverse">
-      <div class="showcase-text">
+  <!-- FEATURE CAROUSEL -->
+  <section id="features" class="feature-carousel" role="region" aria-label="Net Results features" aria-roledescription="carousel">
+    <div class="carousel-shell">
+      <div class="carousel-copy-column">
+        <p class="section-label carousel-label">Explore the app</p>
+        <div class="carousel-copy-stage" aria-live="off" aria-atomic="true">
+          <article id="home" class="carousel-copy is-active" data-slide="0" aria-hidden="false">
         <h2>Your season starts here</h2>
         <p>Open Net Results to your player profile, ratings, record, and teams—everything worth checking before the group chat starts asking questions.</p>
         <ul>
@@ -257,17 +454,9 @@
           <li>Team records and next match details at a glance</li>
           <li>Every current, upcoming, and past team in one place</li>
         </ul>
-      </div>
-      <div class="showcase-img">
-        <img src="screenshots/16-home.png" alt="Net Results home screen with player ratings, record, and teams">
-      </div>
-    </div>
-  </section>
+          </article>
 
-  <!-- SHOWCASE: PROFILE -->
-  <section id="profile" class="showcase dark-bg">
-    <div class="showcase-inner">
-      <div class="showcase-text">
+          <article id="profile" class="carousel-copy" data-slide="1" aria-hidden="true">
         <h2>All your teams, one view</h2>
         <p>Sign in with USTA NorCal to see every current, upcoming, and past team. Visit any player profile to browse their teams, too.</p>
         <ul>
@@ -276,17 +465,9 @@
           <li>TennisRecord, UTR-S, and UTR-D ratings on your profile</li>
           <li>Export timed upcoming matches to your calendar</li>
         </ul>
-      </div>
-      <div class="showcase-img">
-        <img src="screenshots/01-home-team-expanded.png" alt="Profile with teams expanded">
-      </div>
-    </div>
-  </section>
+          </article>
 
-  <!-- SHOWCASE: LINEUP PLANNER -->
-  <section id="planner" class="showcase">
-    <div class="showcase-inner reverse">
-      <div class="showcase-text">
+          <article id="planner" class="carousel-copy" data-slide="2" aria-hidden="true">
         <h2>Plan a lineup</h2>
         <p>Toggle player availability locally, then compare an Equal Play proposal with a Strongest Lines proposal for the same match.</p>
         <ul>
@@ -294,17 +475,9 @@
           <li>League format, gender, and rating limits respected</li>
           <li>Recent partner records help inform doubles pairings</li>
         </ul>
-      </div>
-      <div class="showcase-img">
-        <img src="screenshots/02-lineup-planner.png" alt="Lineup planner with a proposed lineup">
-      </div>
-    </div>
-  </section>
+          </article>
 
-  <!-- SHOWCASE: STANDINGS -->
-  <section id="standings" class="showcase dark-bg">
-    <div class="showcase-inner">
-      <div class="showcase-text">
+          <article id="standings" class="carousel-copy" data-slide="3" aria-hidden="true">
         <h2>See where the flight is headed</h2>
         <p>Compare the actual standings with a projected end-of-season table and see each team’s likely movement in rank.</p>
         <ul>
@@ -312,17 +485,9 @@
           <li>Projected rank and record</li>
           <li>Confidence and up, down, or unchanged movement</li>
         </ul>
-      </div>
-      <div class="showcase-img">
-        <img src="screenshots/03-projected-standings.png" alt="Projected standings">
-      </div>
-    </div>
-  </section>
+          </article>
 
-  <!-- SHOWCASE: ROSTER -->
-  <section id="roster" class="showcase">
-    <div class="showcase-inner reverse">
-      <div class="showcase-text">
+          <article id="roster" class="carousel-copy" data-slide="4" aria-hidden="true">
         <h2>Know the roster before match day</h2>
         <p>See every player, rating, eligibility indicator, and record. Expand a player when you want their recent match history.</p>
         <ul>
@@ -330,17 +495,9 @@
           <li>View an opponent’s roster before match day</li>
           <li>Open a player’s recent results without losing your place</li>
         </ul>
-      </div>
-      <div class="showcase-img">
-        <img src="screenshots/05-team-roster.png" alt="Team roster">
-      </div>
-    </div>
-  </section>
+          </article>
 
-  <!-- SHOWCASE: MATCH FILTERS -->
-  <section id="match-filters" class="showcase dark-bg">
-    <div class="showcase-inner">
-      <div class="showcase-text">
+          <article id="match-filters" class="carousel-copy" data-slide="5" aria-hidden="true">
         <h2>Find the matches that matter</h2>
         <p>Filter any player’s history by doubles partner, individual opponent, or the exact opposing doubles pair—and combine filters when the scouting gets serious.</p>
         <ul>
@@ -348,17 +505,9 @@
           <li>Combine “With” and “Against” filters</li>
           <li>See filtered match totals and win–loss records</li>
         </ul>
-      </div>
-      <div class="showcase-img">
-        <img src="screenshots/07-player-match-filters.png" alt="Player match history filtered by partner and opposing doubles pair">
-      </div>
-    </div>
-  </section>
+          </article>
 
-  <!-- SHOWCASE: SEARCH -->
-  <section id="search" class="showcase">
-    <div class="showcase-inner reverse">
-      <div class="showcase-text">
+          <article id="search" class="carousel-copy" data-slide="6" aria-hidden="true">
         <h2>Find a player or team in seconds</h2>
         <p>Search across USTA NorCal players and teams, then open a profile or team page directly from the result.</p>
         <ul>
@@ -366,17 +515,9 @@
           <li>Location and rating at a glance</li>
           <li>Open a result directly into its profile</li>
         </ul>
-      </div>
-      <div class="showcase-img">
-        <img src="screenshots/12-search-results.png" alt="Player and team search results">
-      </div>
-    </div>
-  </section>
+          </article>
 
-  <!-- SHOWCASE: AVAILABILITY -->
-  <section id="availability" class="showcase dark-bg">
-    <div class="showcase-inner">
-      <div class="showcase-text">
+          <article id="availability" class="carousel-copy" data-slide="7" aria-hidden="true">
         <h2>Never miss a match day detail</h2>
         <p>Upcoming matches show the time, location, captain notes, and your availability — all in one expanded row.</p>
         <ul>
@@ -384,17 +525,9 @@
           <li>Mark Yes, No, Maybe, or Call Last</li>
           <li>Open the match location in your maps app</li>
         </ul>
-      </div>
-      <div class="showcase-img">
-        <img src="screenshots/11-team-upcoming-expanded.png" alt="Upcoming match expanded">
-      </div>
-    </div>
-  </section>
+          </article>
 
-  <!-- SHOWCASE: RESULTS -->
-  <section class="showcase">
-    <div class="showcase-inner reverse">
-      <div class="showcase-text">
+          <article id="results" class="carousel-copy" data-slide="8" aria-hidden="true">
         <h2>Every score, every line</h2>
         <p>Tap any result to see the full scorecard — who played each line, their opponents, the score, and available ratings.</p>
         <ul>
@@ -402,17 +535,9 @@
           <li>TennisRecord or UTR ratings shown for all players on each line</li>
           <li>Captains can enter and verify scores after match day</li>
         </ul>
-      </div>
-      <div class="showcase-img">
-        <img src="screenshots/08-team-result-expanded.png" alt="Match result expanded">
-      </div>
-    </div>
-  </section>
+          </article>
 
-  <!-- SHOWCASE: LINEUP SHARING -->
-  <section id="sharing" class="showcase dark-bg">
-    <div class="showcase-inner">
-      <div class="showcase-text">
+          <article id="sharing" class="carousel-copy" data-slide="9" aria-hidden="true">
         <h2>Share the lineup in a tap</h2>
         <p>When a captain publishes the lineup, players can send it to opponents without the paperwork.</p>
         <ul>
@@ -420,17 +545,9 @@
           <li>Send directly to a nearby Net Results user</li>
           <li>Send a formatted lineup through Messages</li>
         </ul>
-      </div>
-      <div class="showcase-img">
-        <img src="screenshots/04-lineup-sharing.png" alt="Published lineup with sharing options">
-      </div>
-    </div>
-  </section>
+          </article>
 
-  <!-- SHOWCASE: PLAYER DETAIL -->
-  <section class="showcase">
-    <div class="showcase-inner reverse">
-      <div class="showcase-text">
+          <article id="player-detail" class="carousel-copy" data-slide="10" aria-hidden="true">
         <h2>See the player behind the rating</h2>
         <p>Expand a roster entry to review recent results and the season record that sits behind the roster view.</p>
         <ul>
@@ -438,17 +555,9 @@
           <li>Individual win–loss record</li>
           <li>Ratings shown in the context of match results</li>
         </ul>
-      </div>
-      <div class="showcase-img">
-        <img src="screenshots/15-team-roster-player-expanded.png" alt="Roster player expanded">
-      </div>
-    </div>
-  </section>
+          </article>
 
-  <!-- SHOWCASE: TEAM -->
-  <section class="showcase dark-bg">
-    <div class="showcase-inner">
-      <div class="showcase-text">
+          <article id="team" class="carousel-copy" data-slide="11" aria-hidden="true">
         <h2>Every detail for every team</h2>
         <p>Open a team for its schedule, record, roster, standings, and scorecards.</p>
         <ul>
@@ -456,17 +565,9 @@
           <li>Upcoming and completed matches in one view</li>
           <li>One tap from a team to its roster or standings</li>
         </ul>
-      </div>
-      <div class="showcase-img">
-        <img src="screenshots/13-team.png" alt="Team view">
-      </div>
-    </div>
-  </section>
+          </article>
 
-  <!-- SHOWCASE: ACCOUNT CONTROLS -->
-  <section id="account-controls" class="showcase">
-    <div class="showcase-inner reverse">
-      <div class="showcase-text">
+          <article id="account-controls" class="carousel-copy" data-slide="12" aria-hidden="true">
         <h2>Keep account access under your control</h2>
         <p>Manage your USTA NorCal and UTR sessions, ratings, cached data, and protected Face ID sign-in from one clear Settings screen.</p>
         <ul>
@@ -474,17 +575,9 @@
           <li>Sign out of USTA and UTR separately</li>
           <li>Choose which ratings appear throughout the app</li>
         </ul>
-      </div>
-      <div class="showcase-img">
-        <img src="screenshots/14-settings.png" alt="Settings with Face ID account controls">
-      </div>
-    </div>
-  </section>
+          </article>
 
-  <!-- SHOWCASE: USTA SIGN-IN -->
-  <section id="usta-sign-in" class="showcase dark-bg">
-    <div class="showcase-inner">
-      <div class="showcase-text">
+          <article id="usta-sign-in" class="carousel-copy" data-slide="13" aria-hidden="true">
         <h2>Sign in to USTA NorCal securely</h2>
         <p>Connect your league account in a focused sign-in screen, then let Face ID handle the repeat visits. Typing passwords was never the fun part of tennis.</p>
         <ul>
@@ -492,17 +585,9 @@
           <li>Face ID for quick return access</li>
           <li>Clear controls for saving or removing sign-in details</li>
         </ul>
-      </div>
-      <div class="showcase-img">
-        <img src="screenshots/09-usta-sign-in.png" alt="USTA NorCal sign-in with Face ID credential protection">
-      </div>
-    </div>
-  </section>
+          </article>
 
-  <!-- SHOWCASE: UTR SIGN-IN -->
-  <section id="utr-sign-in" class="showcase">
-    <div class="showcase-inner reverse">
-      <div class="showcase-text">
+          <article id="utr-sign-in" class="carousel-copy" data-slide="14" aria-hidden="true">
         <h2>Bring your UTR ratings along</h2>
         <p>Connect UTR Sports to add singles and doubles ratings throughout Net Results, with the same optional Face ID protection for saved credentials.</p>
         <ul>
@@ -510,17 +595,9 @@
           <li>Face ID-protected return sign-in</li>
           <li>Separate control from your USTA NorCal session</li>
         </ul>
-      </div>
-      <div class="showcase-img">
-        <img src="screenshots/10-utr-sign-in.png" alt="UTR Sports sign-in with Face ID credential protection">
-      </div>
-    </div>
-  </section>
+          </article>
 
-  <!-- SHOWCASE: VENUE RATINGS -->
-  <section id="venue-ratings" class="showcase dark-bg">
-    <div class="showcase-inner">
-      <div class="showcase-text">
+          <article id="venue-ratings" class="carousel-copy" data-slide="15" aria-hidden="true">
         <h2>Know the courts before you arrive</h2>
         <p>Rate match venues and compare notes from players who have competed there—because sharing is caring, especially for court reconnaissance.</p>
         <ul>
@@ -528,17 +605,9 @@
           <li>See the venue’s overall rating at a glance</li>
           <li>Share your full name or initials with each review</li>
         </ul>
-      </div>
-      <div class="showcase-img">
-        <img src="screenshots/06-venue-ratings.png" alt="Venue rating form with tennis-ball category scores">
-      </div>
-    </div>
-  </section>
+          </article>
 
-  <!-- SHOWCASE: ISSUE REPORTING -->
-  <section id="issue-reporting" class="showcase">
-    <div class="showcase-inner reverse">
-      <div class="showcase-text">
+          <article id="issue-reporting" class="carousel-copy" data-slide="16" aria-hidden="true">
         <h2>Report a problem without losing the plot</h2>
         <p>Send feedback from any screen with the useful technical context already attached, because “something went wrong somewhere” only gets us so far.</p>
         <ul>
@@ -546,9 +615,84 @@
           <li>Attach a screenshot and recent network diagnostics</li>
           <li>Review exactly what will be shared before sending</li>
         </ul>
+          </article>
+        </div>
+
+        <div class="carousel-controls" role="group" aria-label="Carousel controls">
+          <button class="carousel-control" type="button" data-action="previous" aria-label="Previous feature" disabled>←</button>
+          <button class="carousel-play" type="button" data-action="play">Pause</button>
+          <div class="carousel-counter" aria-live="off">
+            <span class="carousel-counter-current">01</span>
+            <span aria-hidden="true"> / </span>
+            <span class="sr-only"> of </span>
+            <span>17</span>
+          </div>
+          <button class="carousel-control" type="button" data-action="next" aria-label="Next feature">
+            <span aria-hidden="true">→</span>
+            <svg class="carousel-countdown" viewBox="0 0 44 44" aria-hidden="true">
+              <circle class="carousel-countdown-circle" cx="22" cy="22" r="20.5" pathLength="1"></circle>
+            </svg>
+          </button>
+        </div>
+        <div class="carousel-progress" role="progressbar" aria-label="Feature 1 of 17" aria-valuemin="1" aria-valuemax="17" aria-valuenow="1">
+          <div class="carousel-progress-fill"></div>
+        </div>
       </div>
-      <div class="showcase-img">
-        <img src="screenshots/17-report-issue.png" alt="In-app issue report with description and diagnostic context">
+
+      <div class="carousel-viewport" role="group" aria-label="Feature screenshots">
+        <div class="carousel-track">
+          <button class="carousel-shot is-active" type="button" data-index="0" tabindex="-1" aria-current="true" aria-label="Current feature: Your season starts here">
+            <img src="screenshots/16-home.png" alt="Net Results home screen with player ratings, record, and teams" width="1242" height="2688">
+          </button>
+          <button class="carousel-shot is-neighbor" type="button" data-index="1" aria-label="Show next feature: All your teams, one view">
+            <img src="screenshots/01-home-team-expanded.png" alt="Profile with teams expanded" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="2" tabindex="-1" aria-label="Show feature: Plan a lineup">
+            <img src="screenshots/02-lineup-planner.png" alt="Lineup planner with a proposed lineup" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="3" tabindex="-1" aria-label="Show feature: See where the flight is headed">
+            <img src="screenshots/03-projected-standings.png" alt="Projected standings" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="4" tabindex="-1" aria-label="Show feature: Know the roster before match day">
+            <img src="screenshots/05-team-roster.png" alt="Team roster" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="5" tabindex="-1" aria-label="Show feature: Find the matches that matter">
+            <img src="screenshots/07-player-match-filters.png" alt="Player match history filtered by partner and opposing doubles pair" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="6" tabindex="-1" aria-label="Show feature: Find a player or team in seconds">
+            <img src="screenshots/12-search-results.png" alt="Player and team search results" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="7" tabindex="-1" aria-label="Show feature: Never miss a match day detail">
+            <img src="screenshots/11-team-upcoming-expanded.png" alt="Upcoming match expanded" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="8" tabindex="-1" aria-label="Show feature: Every score, every line">
+            <img src="screenshots/08-team-result-expanded.png" alt="Match result expanded" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="9" tabindex="-1" aria-label="Show feature: Share the lineup in a tap">
+            <img src="screenshots/04-lineup-sharing.png" alt="Published lineup with sharing options" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="10" tabindex="-1" aria-label="Show feature: See the player behind the rating">
+            <img src="screenshots/15-team-roster-player-expanded.png" alt="Roster player expanded" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="11" tabindex="-1" aria-label="Show feature: Every detail for every team">
+            <img src="screenshots/13-team.png" alt="Team view" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="12" tabindex="-1" aria-label="Show feature: Keep account access under your control">
+            <img src="screenshots/14-settings.png" alt="Settings with Face ID account controls" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="13" tabindex="-1" aria-label="Show feature: Sign in to USTA NorCal securely">
+            <img src="screenshots/09-usta-sign-in.png" alt="USTA NorCal sign-in with Face ID credential protection" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="14" tabindex="-1" aria-label="Show feature: Bring your UTR ratings along">
+            <img src="screenshots/10-utr-sign-in.png" alt="UTR Sports sign-in with Face ID credential protection" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="15" tabindex="-1" aria-label="Show feature: Know the courts before you arrive">
+            <img src="screenshots/06-venue-ratings.png" alt="Venue rating form with tennis-ball category scores" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="16" tabindex="-1" aria-label="Show feature: Report a problem without losing the plot">
+            <img src="screenshots/17-report-issue.png" alt="In-app issue report with description and diagnostic context" width="1242" height="2688" loading="lazy">
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -588,6 +732,288 @@
       <a href="http://github.com/ycombinator/gsl/issues">Support</a>
     </p>
   </footer>
+
+  <script>
+  (function () {
+    var carousel = document.querySelector('.feature-carousel');
+    if (!carousel) return;
+
+    var copies = Array.from(carousel.querySelectorAll('.carousel-copy'));
+    var shots = Array.from(carousel.querySelectorAll('.carousel-shot'));
+    var copyStage = carousel.querySelector('.carousel-copy-stage');
+    var viewport = carousel.querySelector('.carousel-viewport');
+    var track = carousel.querySelector('.carousel-track');
+    var previousButton = carousel.querySelector('[data-action="previous"]');
+    var nextButton = carousel.querySelector('[data-action="next"]');
+    var playButton = carousel.querySelector('[data-action="play"]');
+    var counter = carousel.querySelector('.carousel-counter-current');
+    var progress = carousel.querySelector('.carousel-progress');
+    var progressFill = carousel.querySelector('.carousel-progress-fill');
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var slideCount = shots.length;
+    var autoplayDelay = 20000;
+    var currentIndex = 0;
+    var timer = null;
+    var isPlaying = !reducedMotion.matches;
+    var isFocusPaused = false;
+    var trackOffset = 0;
+    var pointerStartX = null;
+    var pointerDeltaX = 0;
+    var pointerId = null;
+    var suppressClick = false;
+
+    carousel.style.setProperty('--autoplay-delay', autoplayDelay + 'ms');
+
+    function titleAt(index) {
+      return copies[index].querySelector('h2').textContent;
+    }
+
+    function updatePlayButton() {
+      playButton.textContent = isPlaying ? 'Pause' : 'Play';
+      playButton.setAttribute('aria-label', isPlaying ? 'Pause automatic slide advancement' : 'Play automatic slide advancement');
+      playButton.hidden = reducedMotion.matches;
+      copyStage.setAttribute('aria-live', isPlaying ? 'off' : 'polite');
+    }
+
+    function positionTrack(animate) {
+      var activeShot = shots[currentIndex];
+      if (!activeShot) return;
+
+      trackOffset = viewport.clientWidth / 2 - (activeShot.offsetLeft + activeShot.offsetWidth / 2);
+      if (!animate) track.classList.add('is-jumping');
+      track.style.transform = 'translate3d(' + trackOffset + 'px, 0, 0)';
+
+      if (!animate) {
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            track.classList.remove('is-jumping');
+          });
+        });
+      }
+    }
+
+    function updateCarousel(animate) {
+      copies.forEach(function (copy, index) {
+        var isActive = index === currentIndex;
+        copy.classList.toggle('is-active', isActive);
+        copy.setAttribute('aria-hidden', String(!isActive));
+      });
+
+      shots.forEach(function (shot, index) {
+        var distance = Math.abs(index - currentIndex);
+        var isActive = distance === 0;
+        var isNeighbor = distance === 1;
+
+        shot.classList.toggle('is-active', isActive);
+        shot.classList.toggle('is-neighbor', isNeighbor);
+        shot.tabIndex = isNeighbor ? 0 : -1;
+        shot.setAttribute('aria-hidden', String(!(isActive || isNeighbor)));
+
+        if (isActive) {
+          shot.setAttribute('aria-current', 'true');
+          shot.setAttribute('aria-label', 'Current feature: ' + titleAt(index));
+        } else {
+          shot.removeAttribute('aria-current');
+          var direction = index < currentIndex ? 'previous' : 'next';
+          shot.setAttribute('aria-label', 'Show ' + direction + ' feature: ' + titleAt(index));
+        }
+      });
+
+      previousButton.disabled = currentIndex === 0;
+      nextButton.disabled = currentIndex === slideCount - 1;
+      counter.textContent = String(currentIndex + 1).padStart(2, '0');
+      progress.setAttribute('aria-valuenow', String(currentIndex + 1));
+      progress.setAttribute('aria-label', 'Feature ' + (currentIndex + 1) + ' of ' + slideCount);
+      progressFill.style.width = ((currentIndex + 1) / slideCount * 100) + '%';
+      positionTrack(animate);
+    }
+
+    function clearAutoplay() {
+      window.clearTimeout(timer);
+      timer = null;
+      nextButton.classList.remove('is-counting');
+    }
+
+    function startCountdown() {
+      nextButton.classList.remove('is-counting');
+      void nextButton.offsetWidth;
+      nextButton.classList.add('is-counting');
+    }
+
+    function scheduleAutoplay() {
+      clearAutoplay();
+      if (!isPlaying || isFocusPaused || document.hidden) return;
+
+      if (currentIndex === slideCount - 1) {
+        isPlaying = false;
+        updatePlayButton();
+        return;
+      }
+
+      timer = window.setTimeout(function () {
+        goTo(currentIndex + 1, false);
+      }, autoplayDelay);
+      startCountdown();
+    }
+
+    function setPlaying(nextPlaying) {
+      isPlaying = nextPlaying && !reducedMotion.matches;
+      clearAutoplay();
+
+      if (isPlaying && currentIndex === slideCount - 1) {
+        currentIndex = 0;
+        updateCarousel(false);
+      }
+
+      updatePlayButton();
+      scheduleAutoplay();
+    }
+
+    function goTo(nextIndex, userInitiated) {
+      var boundedIndex = Math.max(0, Math.min(nextIndex, slideCount - 1));
+      if (boundedIndex === currentIndex) {
+        positionTrack(true);
+        return;
+      }
+
+      if (userInitiated) {
+        isPlaying = false;
+        updatePlayButton();
+      }
+
+      currentIndex = boundedIndex;
+      updateCarousel(true);
+      scheduleAutoplay();
+    }
+
+    previousButton.addEventListener('click', function () {
+      goTo(currentIndex - 1, true);
+    });
+
+    nextButton.addEventListener('click', function () {
+      goTo(currentIndex + 1, true);
+    });
+
+    playButton.addEventListener('click', function () {
+      isFocusPaused = false;
+      setPlaying(!isPlaying);
+    });
+
+    shots.forEach(function (shot) {
+      shot.addEventListener('click', function (event) {
+        if (suppressClick) {
+          event.preventDefault();
+          return;
+        }
+        goTo(Number(shot.dataset.index), true);
+      });
+    });
+
+    carousel.addEventListener('keydown', function (event) {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        goTo(currentIndex - 1, true);
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        goTo(currentIndex + 1, true);
+      } else if (event.key === 'Home') {
+        event.preventDefault();
+        goTo(0, true);
+      } else if (event.key === 'End') {
+        event.preventDefault();
+        goTo(slideCount - 1, true);
+      }
+    });
+
+    carousel.addEventListener('focusin', function () {
+      isFocusPaused = true;
+      clearAutoplay();
+    });
+
+    carousel.addEventListener('focusout', function (event) {
+      if (!carousel.contains(event.relatedTarget)) {
+        isFocusPaused = false;
+        scheduleAutoplay();
+      }
+    });
+
+    viewport.addEventListener('pointerdown', function (event) {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      pointerStartX = event.clientX;
+      pointerDeltaX = 0;
+      pointerId = event.pointerId;
+      suppressClick = false;
+      viewport.setPointerCapture(pointerId);
+    });
+
+    viewport.addEventListener('pointermove', function (event) {
+      if (pointerStartX === null || event.pointerId !== pointerId) return;
+      pointerDeltaX = event.clientX - pointerStartX;
+
+      if (Math.abs(pointerDeltaX) > 8) {
+        suppressClick = true;
+        viewport.classList.add('is-dragging');
+        track.classList.add('is-dragging');
+        track.style.transform = 'translate3d(' + (trackOffset + pointerDeltaX * 0.72) + 'px, 0, 0)';
+      }
+    });
+
+    function finishPointer(event) {
+      if (pointerStartX === null || event.pointerId !== pointerId) return;
+
+      var swipeDistance = pointerDeltaX;
+      pointerStartX = null;
+      pointerDeltaX = 0;
+      pointerId = null;
+      viewport.classList.remove('is-dragging');
+      track.classList.remove('is-dragging');
+
+      if (swipeDistance < -45) {
+        goTo(currentIndex + 1, true);
+      } else if (swipeDistance > 45) {
+        goTo(currentIndex - 1, true);
+      } else {
+        positionTrack(true);
+      }
+
+      window.setTimeout(function () {
+        suppressClick = false;
+      }, 0);
+    }
+
+    viewport.addEventListener('pointerup', finishPointer);
+    viewport.addEventListener('pointercancel', finishPointer);
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) clearAutoplay();
+      else scheduleAutoplay();
+    });
+
+    window.addEventListener('resize', function () {
+      positionTrack(false);
+    });
+
+    reducedMotion.addEventListener('change', function (event) {
+      if (event.matches) isPlaying = false;
+      updatePlayButton();
+      scheduleAutoplay();
+      positionTrack(false);
+    });
+
+    var hashIndex = copies.findIndex(function (copy) {
+      return copy.id && '#' + copy.id === window.location.hash;
+    });
+
+    if (hashIndex > 0) {
+      currentIndex = hashIndex;
+      isPlaying = false;
+    }
+
+    updatePlayButton();
+    updateCarousel(false);
+    scheduleAutoplay();
+  })();
+  </script>
 
 </body>
 </html>
