@@ -132,14 +132,43 @@
       font-size: clamp(1.4em, 3vw, 2em);
       font-weight: 700;
       letter-spacing: -0.02em;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       color: var(--fg);
     }
 
-    .carousel-copy p { font-size: 1em; color: var(--mid); margin-bottom: 12px; }
+    .carousel-title-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .carousel-title-row h2 { margin-bottom: 0; }
+
+    .feature-access-badge {
+      padding: 3px 9px;
+      border: 1px solid rgba(52,199,89,0.4);
+      border-radius: 999px;
+      background: rgba(52,199,89,0.12);
+      color: var(--green);
+      font-size: 0.7em;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      line-height: 1.4;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
     .carousel-copy ul { list-style: none; padding: 0; }
     .carousel-copy ul li { font-size: 0.95em; color: var(--mid); padding: 4px 0; }
     .carousel-copy ul li::before { content: "✓ "; color: var(--green); font-weight: 700; }
+    .carousel-copy ul li.feature-access-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
 
     .carousel-controls {
       display: flex;
@@ -240,7 +269,7 @@
     }
 
     .carousel-progress-fill {
-      width: calc(100% / 17);
+      width: calc(100% / 18);
       height: 100%;
       background: var(--green);
       transform-origin: left;
@@ -250,6 +279,7 @@
     .carousel-viewport {
       width: 456px;
       max-width: 100vw;
+      padding: 28px 0;
       overflow: hidden;
       touch-action: pan-y;
       cursor: grab;
@@ -280,12 +310,14 @@
       background: transparent;
       opacity: 0.08;
       filter: saturate(0.65);
+      transform: scale(0.72);
+      transform-origin: center;
       cursor: pointer;
-      transition: opacity 500ms ease, filter 500ms ease;
+      transition: opacity 500ms ease, filter 500ms ease, transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .carousel-shot.is-neighbor { opacity: 0.42; }
-    .carousel-shot.is-active { opacity: 1; filter: none; cursor: default; }
+    .carousel-shot.is-neighbor { opacity: 0.42; transform: scale(0.82); }
+    .carousel-shot.is-active { opacity: 1; filter: none; transform: scale(1.08); cursor: default; }
 
     .carousel-shot img {
       width: 100%;
@@ -378,6 +410,7 @@
       }
 
       .carousel-label { text-align: center; }
+      .carousel-title-row { justify-content: center; }
       .carousel-copy { text-align: center; }
       .carousel-copy ul { display: inline-block; text-align: left; }
       .carousel-controls { justify-content: center; }
@@ -446,175 +479,172 @@
       <div class="carousel-copy-column">
         <p class="section-label carousel-label">Explore the app</p>
         <div class="carousel-copy-stage" aria-live="off" aria-atomic="true">
-          <article id="home" class="carousel-copy is-active" data-slide="0" aria-hidden="false">
-        <h2>Your season starts here</h2>
-        <p>Open Net Results to your player profile, ratings, record, and teams—everything worth checking before the group chat starts asking questions.</p>
-        <ul>
-          <li>Current NTRP, TennisRecord, and UTR ratings</li>
-          <li>Team records and next match details at a glance</li>
-          <li>Every current, upcoming, and past team in one place</li>
-        </ul>
+          <article id="usta-sign-in" class="carousel-copy is-active" data-slide="0" aria-hidden="false">
+            <h2>Sign in to USTA securely</h2>
+            <ul>
+              <li>Credentials protected on your device</li>
+              <li>Optional Face ID sign-in</li>
+              <li>No credentials stored by the app</li>
+            </ul>
           </article>
 
-          <article id="profile" class="carousel-copy" data-slide="1" aria-hidden="true">
-        <h2>All your teams, one view</h2>
-        <p>Sign in with USTA NorCal to see every current, upcoming, and past team. Visit any player profile to browse their teams, too.</p>
-        <ul>
-          <li>Win–loss record at a glance</li>
-          <li>Next match date and opponent shown on each card</li>
-          <li>TennisRecord, UTR-S, and UTR-D ratings on your profile</li>
-          <li>Export timed upcoming matches to your calendar</li>
-        </ul>
+          <article id="utr-sign-in" class="carousel-copy" data-slide="1" aria-hidden="true">
+            <h2>Bring UTR ratings along</h2>
+            <ul>
+              <li>Ratings on profiles and rosters</li>
+              <li>Optional Face ID sign-in</li>
+              <li>No credentials stored by the app</li>
+            </ul>
           </article>
 
-          <article id="planner" class="carousel-copy" data-slide="2" aria-hidden="true">
-        <h2>Plan a lineup</h2>
-        <p>Toggle player availability locally, then compare an Equal Play proposal with a Strongest Lines proposal for the same match.</p>
-        <ul>
-          <li>Available to signed-in players on that team and seeded from team availability</li>
-          <li>League format, gender, and rating limits respected</li>
-          <li>Recent partner records help inform doubles pairings</li>
-        </ul>
+          <article id="home" class="carousel-copy" data-slide="2" aria-hidden="true">
+            <h2>Your season starts here</h2>
+            <ul>
+              <li>Your NTRP, TennisRecord, and UTR ratings</li>
+              <li>Current, upcoming, and past teams</li>
+              <li>Upcoming and past matches</li>
+            </ul>
           </article>
 
-          <article id="standings" class="carousel-copy" data-slide="3" aria-hidden="true">
-        <h2>See where the flight is headed</h2>
-        <p>Compare the actual standings with a projected end-of-season table and see each team’s likely movement in rank.</p>
-        <ul>
-          <li>Current rank and record</li>
-          <li>Projected rank and record</li>
-          <li>Confidence and up, down, or unchanged movement</li>
-        </ul>
+          <article id="match-filters" class="carousel-copy" data-slide="3" aria-hidden="true">
+            <h2>Find the matches that matter</h2>
+            <ul>
+              <li>Filter by partners, opponents, or both</li>
+              <li>Search each filter by name</li>
+              <li>See filtered totals and records</li>
+            </ul>
           </article>
 
-          <article id="roster" class="carousel-copy" data-slide="4" aria-hidden="true">
-        <h2>Know the roster before match day</h2>
-        <p>See every player, rating, eligibility indicator, and record. Expand a player when you want their recent match history.</p>
-        <ul>
-          <li>Sort by name, TennisRecord, or UTR</li>
-          <li>View an opponent’s roster before match day</li>
-          <li>Open a player’s recent results without losing your place</li>
-        </ul>
+          <article id="profile" class="carousel-copy" data-slide="4" aria-hidden="true">
+            <h2>All your teams, one view</h2>
+            <ul>
+              <li>Your win–loss records at a glance</li>
+              <li>Export your upcoming matches to Calendar</li>
+              <li>Tap the tennis ball for venue ratings</li>
+            </ul>
           </article>
 
-          <article id="match-filters" class="carousel-copy" data-slide="5" aria-hidden="true">
-        <h2>Find the matches that matter</h2>
-        <p>Filter any player’s history by doubles partner, individual opponent, or the exact opposing doubles pair—and combine filters when the scouting gets serious.</p>
-        <ul>
-          <li>Search partners, opponents, and opponent doubles pairs by name</li>
-          <li>Combine “With” and “Against” filters</li>
-          <li>See filtered match totals and win–loss records</li>
-        </ul>
+          <article id="team" class="carousel-copy" data-slide="5" aria-hidden="true">
+            <h2>Everything about every team</h2>
+            <ul>
+              <li>Record and full schedule</li>
+              <li>Upcoming and completed matches</li>
+              <li>Roster, standings, and scorecards</li>
+            </ul>
           </article>
 
-          <article id="search" class="carousel-copy" data-slide="6" aria-hidden="true">
-        <h2>Find a player or team in seconds</h2>
-        <p>Search across USTA NorCal players and teams, then open a profile or team page directly from the result.</p>
-        <ul>
-          <li>Player and team results together</li>
-          <li>Location and rating at a glance</li>
-          <li>Open a result directly into its profile</li>
-        </ul>
+          <article id="standings" class="carousel-copy" data-slide="6" aria-hidden="true">
+            <h2>See where the team stands</h2>
+            <ul>
+              <li>Current rank and record</li>
+              <li>Projected rank and record</li>
+              <li>Rotate to see the full table</li>
+            </ul>
           </article>
 
-          <article id="availability" class="carousel-copy" data-slide="7" aria-hidden="true">
-        <h2>Never miss a match day detail</h2>
-        <p>Upcoming matches show the time, location, captain notes, and your availability — all in one expanded row.</p>
-        <ul>
-          <li>Match notes, such as gate codes or the water situation</li>
-          <li>Mark Yes, No, Maybe, or Call Last</li>
-          <li>Open the match location in your maps app</li>
-        </ul>
+          <article id="roster" class="carousel-copy" data-slide="7" aria-hidden="true">
+            <h2>Scout the full roster</h2>
+            <ul>
+              <li>Sort by name, gender, results, and ratings</li>
+              <li>Review an opponent’s roster</li>
+              <li>Expand recent match history</li>
+            </ul>
           </article>
 
-          <article id="results" class="carousel-copy" data-slide="8" aria-hidden="true">
-        <h2>Every score, every line</h2>
-        <p>Tap any result to see the full scorecard — who played each line, their opponents, the score, and available ratings.</p>
-        <ul>
-          <li>Line-by-line match results</li>
-          <li>TennisRecord or UTR ratings shown for all players on each line</li>
-          <li>Captains can enter and verify scores after match day</li>
-        </ul>
+          <article id="player-detail" class="carousel-copy" data-slide="8" aria-hidden="true">
+            <h2>See beyond the rating</h2>
+            <ul>
+              <li>Individual win–loss record</li>
+              <li>Detailed scorecards</li>
+              <li>TennisRecord and UTR ratings for all players</li>
+            </ul>
           </article>
 
-          <article id="sharing" class="carousel-copy" data-slide="9" aria-hidden="true">
-        <h2>Share the lineup in a tap</h2>
-        <p>When a captain publishes the lineup, players can send it to opponents without the paperwork.</p>
-        <ul>
-          <li>Review singles and doubles assignments before sharing</li>
-          <li>Send directly to a nearby Net Results user</li>
-          <li>Send a formatted lineup through Messages</li>
-        </ul>
+          <article id="results" class="carousel-copy" data-slide="9" aria-hidden="true">
+            <h2>Know a team’s history</h2>
+            <ul>
+              <li>Players, opponents, and scores</li>
+              <li>TennisRecord and UTR ratings</li>
+              <li class="feature-access-item">
+                <span>Enter and verify scores</span>
+                <span class="feature-access-badge">For captains &amp; co-captains</span>
+              </li>
+            </ul>
           </article>
 
-          <article id="player-detail" class="carousel-copy" data-slide="10" aria-hidden="true">
-        <h2>See the player behind the rating</h2>
-        <p>Expand a roster entry to review recent results and the season record that sits behind the roster view.</p>
-        <ul>
-          <li>Recent opponent and partner history</li>
-          <li>Individual win–loss record</li>
-          <li>Ratings shown in the context of match results</li>
-        </ul>
+          <article id="availability" class="carousel-copy" data-slide="10" aria-hidden="true">
+            <h2>Know what’s next</h2>
+            <ul>
+              <li>Time, location, and captain notes</li>
+              <li>One-tap directions in Maps</li>
+              <li>Update your availability with a single tap</li>
+            </ul>
           </article>
 
-          <article id="team" class="carousel-copy" data-slide="11" aria-hidden="true">
-        <h2>Every detail for every team</h2>
-        <p>Open a team for its schedule, record, roster, standings, and scorecards.</p>
-        <ul>
-          <li>Current record and full season schedule</li>
-          <li>Upcoming and completed matches in one view</li>
-          <li>One tap from a team to its roster or standings</li>
-        </ul>
+          <article id="venue-ratings" class="carousel-copy" data-slide="11" aria-hidden="true">
+            <h2>Scout your match venues</h2>
+            <ul>
+              <li>Scores for water, restrooms, lights, courts, and food</li>
+              <li>Overall venue score</li>
+              <li>Share your name—or keep it to initials</li>
+            </ul>
           </article>
 
-          <article id="account-controls" class="carousel-copy" data-slide="12" aria-hidden="true">
-        <h2>Keep account access under your control</h2>
-        <p>Manage your USTA NorCal and UTR sessions, ratings, cached data, and protected Face ID sign-in from one clear Settings screen.</p>
-        <ul>
-          <li>Turn Face ID off for either account at any time</li>
-          <li>Sign out of USTA and UTR separately</li>
-          <li>Choose which ratings appear throughout the app</li>
-        </ul>
+          <article id="planner" class="carousel-copy" data-slide="12" aria-hidden="true">
+            <h2>Plan a match lineup</h2>
+            <ul>
+              <li>Team availability as a starting point</li>
+              <li>Lineup composition rules enforced</li>
+              <li>TennisRecord ratings and recent partner records considered</li>
+            </ul>
           </article>
 
-          <article id="usta-sign-in" class="carousel-copy" data-slide="13" aria-hidden="true">
-        <h2>Sign in to USTA NorCal securely</h2>
-        <p>Connect your league account in a focused sign-in screen, then let Face ID handle the repeat visits. Typing passwords was never the fun part of tennis.</p>
-        <ul>
-          <li>Protected credential storage on your device</li>
-          <li>Face ID for quick return access</li>
-          <li>Clear controls for saving or removing sign-in details</li>
-        </ul>
+          <article id="captain-lineup" class="carousel-copy" data-slide="13" aria-hidden="true">
+            <div class="carousel-title-row">
+              <h2>Set the match lineup</h2>
+              <span class="feature-access-badge">For captains &amp; co-captains</span>
+            </div>
+            <ul>
+              <li>Drag available players into every line</li>
+              <li>Lineup composition rules enforced</li>
+              <li>Add notes and control team visibility</li>
+            </ul>
           </article>
 
-          <article id="utr-sign-in" class="carousel-copy" data-slide="14" aria-hidden="true">
-        <h2>Bring your UTR ratings along</h2>
-        <p>Connect UTR Sports to add singles and doubles ratings throughout Net Results, with the same optional Face ID protection for saved credentials.</p>
-        <ul>
-          <li>UTR singles and doubles ratings across profiles and rosters</li>
-          <li>Face ID-protected return sign-in</li>
-          <li>Separate control from your USTA NorCal session</li>
-        </ul>
+          <article id="sharing" class="carousel-copy" data-slide="14" aria-hidden="true">
+            <h2>Share the lineup in a tap</h2>
+            <ul>
+              <li>Just bring your phone on match day</li>
+              <li>Send directly to nearby Net Results users</li>
+              <li>Or text it to them</li>
+            </ul>
           </article>
 
-          <article id="venue-ratings" class="carousel-copy" data-slide="15" aria-hidden="true">
-        <h2>Know the courts before you arrive</h2>
-        <p>Rate match venues and compare notes from players who have competed there—because sharing is caring, especially for court reconnaissance.</p>
-        <ul>
-          <li>Score water, restrooms, lighting, courts, and food separately</li>
-          <li>See the venue’s overall rating at a glance</li>
-          <li>Share your full name or initials with each review</li>
-        </ul>
+          <article id="search" class="carousel-copy" data-slide="15" aria-hidden="true">
+            <h2>Find a player or team in seconds</h2>
+            <ul>
+              <li>Players and teams together</li>
+              <li>Location and rating at a glance</li>
+              <li>Direct links to profiles and teams</li>
+            </ul>
           </article>
 
-          <article id="issue-reporting" class="carousel-copy" data-slide="16" aria-hidden="true">
-        <h2>Report a problem without losing the plot</h2>
-        <p>Send feedback from any screen with the useful technical context already attached, because “something went wrong somewhere” only gets us so far.</p>
-        <ul>
-          <li>Include the current screen, team, and relevant app state</li>
-          <li>Attach a screenshot and recent network diagnostics</li>
-          <li>Review exactly what will be shared before sending</li>
-        </ul>
+          <article id="account-controls" class="carousel-copy" data-slide="16" aria-hidden="true">
+            <h2>Make your app your own</h2>
+            <ul>
+              <li>Separate USTA and UTR sign-out</li>
+              <li>Face ID controls for each account</li>
+              <li>Choose the ratings you want to see</li>
+            </ul>
+          </article>
+
+          <article id="issue-reporting" class="carousel-copy" data-slide="17" aria-hidden="true">
+            <h2>Report issues with context</h2>
+            <ul>
+              <li>Send problems, ideas, questions—or even praise</li>
+              <li>Screenshot and relevant network diagnostics automatically included</li>
+              <li>Preview everything before sending</li>
+            </ul>
           </article>
         </div>
 
@@ -625,7 +655,7 @@
             <span class="carousel-counter-current">01</span>
             <span aria-hidden="true"> / </span>
             <span class="sr-only"> of </span>
-            <span>17</span>
+            <span>18</span>
           </div>
           <button class="carousel-control" type="button" data-action="next" aria-label="Next feature">
             <span aria-hidden="true">→</span>
@@ -634,62 +664,65 @@
             </svg>
           </button>
         </div>
-        <div class="carousel-progress" role="progressbar" aria-label="Feature 1 of 17" aria-valuemin="1" aria-valuemax="17" aria-valuenow="1">
+        <div class="carousel-progress" role="progressbar" aria-label="Feature 1 of 18" aria-valuemin="1" aria-valuemax="18" aria-valuenow="1">
           <div class="carousel-progress-fill"></div>
         </div>
       </div>
 
       <div class="carousel-viewport" role="group" aria-label="Feature screenshots">
         <div class="carousel-track">
-          <button class="carousel-shot is-active" type="button" data-index="0" tabindex="-1" aria-current="true" aria-label="Current feature: Your season starts here">
-            <img src="screenshots/16-home.png" alt="Net Results home screen with player ratings, record, and teams" width="1242" height="2688">
+          <button class="carousel-shot is-active" type="button" data-index="0" tabindex="-1" aria-current="true" aria-label="Current feature: Sign in to USTA securely">
+            <img src="screenshots/09-usta-sign-in.png" alt="USTA NorCal sign-in with Face ID credential protection" width="1242" height="2688">
           </button>
-          <button class="carousel-shot is-neighbor" type="button" data-index="1" aria-label="Show next feature: All your teams, one view">
-            <img src="screenshots/01-home-team-expanded.png" alt="Profile with teams expanded" width="1242" height="2688" loading="lazy">
-          </button>
-          <button class="carousel-shot" type="button" data-index="2" tabindex="-1" aria-label="Show feature: Plan a lineup">
-            <img src="screenshots/02-lineup-planner.png" alt="Lineup planner with a proposed lineup" width="1242" height="2688" loading="lazy">
-          </button>
-          <button class="carousel-shot" type="button" data-index="3" tabindex="-1" aria-label="Show feature: See where the flight is headed">
-            <img src="screenshots/03-projected-standings.png" alt="Projected standings" width="1242" height="2688" loading="lazy">
-          </button>
-          <button class="carousel-shot" type="button" data-index="4" tabindex="-1" aria-label="Show feature: Know the roster before match day">
-            <img src="screenshots/05-team-roster.png" alt="Team roster" width="1242" height="2688" loading="lazy">
-          </button>
-          <button class="carousel-shot" type="button" data-index="5" tabindex="-1" aria-label="Show feature: Find the matches that matter">
-            <img src="screenshots/07-player-match-filters.png" alt="Player match history filtered by partner and opposing doubles pair" width="1242" height="2688" loading="lazy">
-          </button>
-          <button class="carousel-shot" type="button" data-index="6" tabindex="-1" aria-label="Show feature: Find a player or team in seconds">
-            <img src="screenshots/12-search-results.png" alt="Player and team search results" width="1242" height="2688" loading="lazy">
-          </button>
-          <button class="carousel-shot" type="button" data-index="7" tabindex="-1" aria-label="Show feature: Never miss a match day detail">
-            <img src="screenshots/11-team-upcoming-expanded.png" alt="Upcoming match expanded" width="1242" height="2688" loading="lazy">
-          </button>
-          <button class="carousel-shot" type="button" data-index="8" tabindex="-1" aria-label="Show feature: Every score, every line">
-            <img src="screenshots/08-team-result-expanded.png" alt="Match result expanded" width="1242" height="2688" loading="lazy">
-          </button>
-          <button class="carousel-shot" type="button" data-index="9" tabindex="-1" aria-label="Show feature: Share the lineup in a tap">
-            <img src="screenshots/04-lineup-sharing.png" alt="Published lineup with sharing options" width="1242" height="2688" loading="lazy">
-          </button>
-          <button class="carousel-shot" type="button" data-index="10" tabindex="-1" aria-label="Show feature: See the player behind the rating">
-            <img src="screenshots/15-team-roster-player-expanded.png" alt="Roster player expanded" width="1242" height="2688" loading="lazy">
-          </button>
-          <button class="carousel-shot" type="button" data-index="11" tabindex="-1" aria-label="Show feature: Every detail for every team">
-            <img src="screenshots/13-team.png" alt="Team view" width="1242" height="2688" loading="lazy">
-          </button>
-          <button class="carousel-shot" type="button" data-index="12" tabindex="-1" aria-label="Show feature: Keep account access under your control">
-            <img src="screenshots/14-settings.png" alt="Settings with Face ID account controls" width="1242" height="2688" loading="lazy">
-          </button>
-          <button class="carousel-shot" type="button" data-index="13" tabindex="-1" aria-label="Show feature: Sign in to USTA NorCal securely">
-            <img src="screenshots/09-usta-sign-in.png" alt="USTA NorCal sign-in with Face ID credential protection" width="1242" height="2688" loading="lazy">
-          </button>
-          <button class="carousel-shot" type="button" data-index="14" tabindex="-1" aria-label="Show feature: Bring your UTR ratings along">
+          <button class="carousel-shot is-neighbor" type="button" data-index="1" aria-label="Show next feature: Bring UTR ratings along">
             <img src="screenshots/10-utr-sign-in.png" alt="UTR Sports sign-in with Face ID credential protection" width="1242" height="2688" loading="lazy">
           </button>
-          <button class="carousel-shot" type="button" data-index="15" tabindex="-1" aria-label="Show feature: Know the courts before you arrive">
+          <button class="carousel-shot" type="button" data-index="2" tabindex="-1" aria-label="Show feature: Your season starts here">
+            <img src="screenshots/16-home.png" alt="Net Results home screen with player ratings, record, and teams" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="3" tabindex="-1" aria-label="Show feature: Find the matches that matter">
+            <img src="screenshots/07-player-match-filters.png" alt="Player match history filtered by partner and opposing doubles pair" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="4" tabindex="-1" aria-label="Show feature: All your teams, one view">
+            <img src="screenshots/01-home-team-expanded.png" alt="Profile with teams expanded" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="5" tabindex="-1" aria-label="Show feature: Everything about every team">
+            <img src="screenshots/13-team.png" alt="Team view" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="6" tabindex="-1" aria-label="Show feature: See where the team stands">
+            <img src="screenshots/03-projected-standings.png" alt="Projected standings" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="7" tabindex="-1" aria-label="Show feature: Scout the full roster">
+            <img src="screenshots/05-team-roster.png" alt="Team roster" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="8" tabindex="-1" aria-label="Show feature: See beyond the rating">
+            <img src="screenshots/15-team-roster-player-expanded.png" alt="Roster player expanded" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="9" tabindex="-1" aria-label="Show feature: Know a team’s history">
+            <img src="screenshots/08-team-result-expanded.png" alt="Match result expanded" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="10" tabindex="-1" aria-label="Show feature: Know what’s next">
+            <img src="screenshots/11-team-upcoming-expanded.png" alt="Upcoming match expanded" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="11" tabindex="-1" aria-label="Show feature: Scout your match venues">
             <img src="screenshots/06-venue-ratings.png" alt="Venue rating form with tennis-ball category scores" width="1242" height="2688" loading="lazy">
           </button>
-          <button class="carousel-shot" type="button" data-index="16" tabindex="-1" aria-label="Show feature: Report a problem without losing the plot">
+          <button class="carousel-shot" type="button" data-index="12" tabindex="-1" aria-label="Show feature: Plan a match lineup">
+            <img src="screenshots/02-lineup-planner.png" alt="Lineup planner with a proposed lineup" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="13" tabindex="-1" aria-label="Show feature: Set the match lineup">
+            <img src="screenshots/18-lineup-planner-captain.png" alt="Captain lineup planner with a custom lineup and publishing settings" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="14" tabindex="-1" aria-label="Show feature: Share the lineup in a tap">
+            <img src="screenshots/04-lineup-sharing.png" alt="Published lineup with sharing options" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="15" tabindex="-1" aria-label="Show feature: Find a player or team in seconds">
+            <img src="screenshots/12-search-results.png" alt="Player and team search results" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="16" tabindex="-1" aria-label="Show feature: Make your app your own">
+            <img src="screenshots/14-settings.png" alt="Settings with Face ID account controls" width="1242" height="2688" loading="lazy">
+          </button>
+          <button class="carousel-shot" type="button" data-index="17" tabindex="-1" aria-label="Show feature: Report issues with context">
             <img src="screenshots/17-report-issue.png" alt="In-app issue report with description and diagnostic context" width="1242" height="2688" loading="lazy">
           </button>
         </div>
@@ -751,7 +784,7 @@
     var progressFill = carousel.querySelector('.carousel-progress-fill');
     var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     var slideCount = shots.length;
-    var autoplayDelay = 20000;
+    var autoplayDelay = 12000;
     var currentIndex = 0;
     var timer = null;
     var isPlaying = !reducedMotion.matches;
