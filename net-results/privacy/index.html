@@ -49,42 +49,141 @@
   </nav>
 
   <div class="content">
+    <!-- BEGIN GENERATED PRIVACY POLICY: net-results-app/PRIVACY.md -->
     <h1>Privacy Policy</h1>
-    <p class="updated">Last updated: March 14, 2026</p>
 
-    <p>Net Results ("the app") is a companion app for USTA NorCal tennis league players. This policy explains what information is collected, how it is used, and your choices.</p>
+    <p class="updated">Last updated: August 24, 2026</p>
 
-    <h2>1. Information You Provide</h2>
-    <p>The app asks you to sign in with your USTA NorCal account credentials (username and password). These credentials are used solely to authenticate with the USTA NorCal website on your behalf. They are stored locally on your device and are never transmitted to any server operated by Net Results.</p>
+    <p>Net Results is a companion app for USTA NorCal league players. This policy describes the information the app handles, where it is stored, and when it is sent to the Net Results service or another service.</p>
 
-    <h2>2. Information Collected Automatically</h2>
-    <p>The app uses <strong>Google AdMob</strong> to display banner advertisements to free users. AdMob may collect the following data automatically:</p>
+    <h2>Account sign-in and sessions</h2>
+
+    <p>When you sign in, your USTA NorCal or UTR Sports login identifier and password are sent over HTTPS to the Net Results API, which forwards them to the selected service to establish a session. Net Results does not persist those credentials on its servers.</p>
+
+    <p>If you enable Face ID for an account, that account&#39;s login identifier and password are stored in the device&#39;s protected, device-only Keychain and require the enrolled Face ID to read. Turning off Face ID for that account deletes the saved credentials.</p>
+
+    <p>After a successful USTA sign-in, the USTA session cookie and the Net Results account token used for protected changes such as venue-rating and lineup edits are stored in the device Keychain. The verified USTA player ID, player name, and login identifier are stored in the app&#39;s local preferences so the session can be restored. Signing out of USTA removes that session information, but it does not remove separately saved Face ID credentials.</p>
+
+    <p>Account tokens contain the USTA player ID, issue and expiration times, and a schema version. They are signed by the Net Results server, expire after 90 days, and require a new USTA sign-in when expired or unverifiable.</p>
+
+    <p>After a successful UTR sign-in, UTR session cookies, the account&#39;s claimed player ID and rating-precision access, and a signed proof of that access are stored in the device Keychain and sent to the Net Results API when a UTR lookup is needed. Signing out of UTR removes that session information. Signing out of USTA leaves the UTR session in place. The next time you sign in to USTA, Net Results uses the USTA player&#39;s name, location, and, when needed, recent teammates to find the corresponding UTR profile. The UTR session remains in place if that profile belongs to the signed-in UTR account; otherwise, the app signs out of UTR. Separately saved Face ID credentials for both accounts remain until Face ID is turned off for the corresponding account.</p>
+
+    <h2>Tennis data and app features</h2>
+
+    <p>The Net Results API retrieves and processes the information needed for the features you request. Depending on the feature, this can include player and team IDs, names, locations, ratings, schedules, rosters, match results, scorecards, lineups, availability, venue details, and captain or co-captain contact information. Availability, lineup assignments, pre-match notes, lineup visibility, and scorecard changes are sent through the Net Results API to USTA NorCal.</p>
+
+    <p>Player or team search text is sent to the Net Results API and USTA NorCal to perform the search. The app&#39;s on-device response cache can retain the search text as part of its cache key along with the returned results. First-party analytics records only the query length and result counts, as described below.</p>
+
+    <p>Net Results obtains tennis data from USTA NorCal, UTR Sports, and TennisRecord.com. For a UTR rating lookup, the API may send a player&#39;s USTA-listed location to Apple Maps Server API to obtain coordinates, then send the player&#39;s name, location, and those coordinates to UTR Sports along with the UTR session cookies needed to authorize the request. TennisRecord lookups may use a player&#39;s name, location, and team names to identify the appropriate public record.</p>
+
+    <p>When you request weather for an eligible upcoming match, the API sends the canonical USTA venue address to Apple Maps Server API to obtain coordinates, then sends those coordinates and the forecast hour to Apple WeatherKit. Venue coordinates can remain in the shared Valkey cache for up to 30 days, and forecast responses are cached until they are no longer useful for the match.</p>
+
+    <p>The API keeps derived response data in a shared Valkey cache to make the app faster and reduce requests to those services. UTR ratings are separated by rating-precision access and expire after no more than 30 minutes. Depending on the other data, the logical cache lifetime is 10 minutes, 1 hour, or 24 hours; expired non-UTR entries may remain available for refresh for up to another 24 hours. A player&#39;s USTA-listed location and its geocoded coordinates can also remain in an in-memory server cache for up to seven days.</p>
+
+    <p>Private lineup-editor forms, pre-match notes, lineup-visibility settings, and submitted lineup payloads are not placed in the shared response cache.</p>
+
+    <h2>Reminder notifications</h2>
+
+    <p>If you allow notifications after signing in, Net Results registers a random installation identifier and the device&#39;s Apple Push Notification service (APNs) token with the Net Results API. The API associates them with your USTA player ID and stores your separate availability-reminder and upcoming-match-reminder preferences. The installation identifier is also kept in the device Keychain.</p>
+
+    <p>To plan reminders, the API uses public player profiles and team schedules. It stores the team and match identifiers and display details, scheduled delivery time, delivery state, attempt count, APNs response reason, and timestamps needed to reconcile schedule changes and prevent duplicate delivery. It does not fetch or store your USTA availability response, lineup membership, USTA session, or credentials for this purpose. APNs tokens are stored in Elasticsearch but are not indexed or written to application logs or issue-report network traces.</p>
+
+    <p>Net Results sends Apple the APNs token, notification text, and the player, team, and match routing identifiers needed to open the relevant screen. Apple processes this information to deliver the notification. Depending on your iOS settings, notification text may appear on the Lock Screen or other system surfaces. You can turn each reminder type off in Net Results Settings or change all notification access in iOS Settings.</p>
+
+    <h2>Lineup confirmations and text messages</h2>
+
+    <p>When a captain or co-captain chooses <strong>Ask for Confirmations</strong>, the Net Results API uses that captain&#39;s current USTA session to verify their role and retrieve the team roster/contact page. It processes the USTA player ID, player name, and phone number only for players in the proposed lineup. Roster phone numbers are not added to public team data, returned to the iOS app, placed in the shared Valkey response cache, or written to application logs or issue-report network traces.</p>
+
+    <p>Net Results stores the proposed lineup, match and team display details, captain/co-captain and participant player IDs, each participant&#39;s pending, confirmed, or declined response, response channel and actor, proposal revision and lifecycle, and related timestamps in Elasticsearch. It stores a keyed, non-reversible phone fingerprint with the proposal so an inbound text response can be matched without indexing the roster phone number. A delivery outbox can temporarily contain the raw destination phone number and message text so a failed delivery can be retried; those fields are not indexed or logged.</p>
+
+    <p>A player is treated as having the app for this workflow when at least one active APNs registration was seen in the previous 21 days. Net Results sends the confirmation request to each qualifying device. When there is no qualifying device, or every qualifying APNs token is rejected as invalid, Net Results may send the request by SMS through Telnyx when a valid USTA-listed phone number is available.</p>
+
+    <p>The first confirmation-request SMS to a player/phone combination includes the SMS consent disclosure. Replying <code>C</code> or <code>D</code> both records consent to Net Results transactional lineup-confirmation texts and confirms or declines that lineup. Until one of those replies is received, Net Results does not send another automated confirmation request to that number. A consent record contains the player ID, keyed phone fingerprint, disclosure version, current consent or opt-out state, and consent-related timestamps. Telnyx processes the destination number, SMS content, delivery status, and inbound reply. Standard message and data rates may apply. Reply <code>STOP</code> to opt out or <code>HELP</code> for help; Telnyx&#39;s messaging profile enforces those commands.</p>
+
+    <p>Confirmation-request pushes open a read-only proposal where the participant can confirm or decline. Captain-update pushes open the corresponding Custom lineup. Notification text can appear on Apple system surfaces according to the device&#39;s notification settings.</p>
+
+    <h2>Venue ratings</h2>
+
+    <p>When you submit a match-venue rating, Net Results stores:</p>
+
     <ul>
-      <li>Device identifiers (e.g. advertising ID)</li>
-      <li>App usage and interaction data</li>
-      <li>IP address and general location (country/region)</li>
-      <li>Device type, operating system version, and language</li>
+      <li>the venue&#39;s USTA Home facility ID, venue name, and address;</li>
+      <li>the match and home-team IDs;</li>
+      <li>your USTA player ID and first and last name components;</li>
+      <li>the venue categories you chose to rate, your calculated overall rating, and your initials-only preference;</li>
+      <li>any optional written review and whether it is pending review, approved, or rejected; and</li>
+      <li>creation and update timestamps.</li>
     </ul>
-    <p>This data is collected and processed by Google in accordance with <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>. Net Results does not have access to or control over this data.</p>
-    <p>Ads are not shown to users who have an active ad-free subscription.</p>
 
-    <h2>3. In-App Purchases</h2>
-    <p>The app offers an optional annual subscription to remove ads. All purchases are processed by Apple through the App Store. Net Results does not collect or store any payment information. Apple's handling of purchase data is governed by <a href="https://www.apple.com/legal/privacy/" target="_blank">Apple's Privacy Policy</a>.</p>
+    <p>Your public attribution is your first name and last initial by default. If you enable “Show only my initials,” only your first and last initials are shown. Your player ID is not returned in the public ratings API. Other players can see the public attribution, rating values, match ID, and creation and update times. You can see your own written review while it is pending or rejected, but other players cannot see it until an administrator approves it. Rejected text remains in your rating so you can revise it. New or edited written reviews return to pending review; removing the text removes it from the rating.</p>
 
-    <h2>4. Data Sharing</h2>
-    <p>Net Results does not sell, rent, or share your personal information with third parties, except as described above (Google AdMob for advertising).</p>
+    <p>Once a day, Net Results sends the administrator an email through Resend listing all pending written reviews. Each listing includes the submitted and calculated rating information, reviewer and venue details, timestamps, and the internal review and version identifiers needed to review one item safely. Resend processes this email content to deliver the moderation notice. Pending reviews remain in later daily notices until approved, rejected, or removed. Venue ratings are stored in Elasticsearch by the Net Results backend and are used to provide venue feedback; they are not used for cross-app tracking.</p>
 
-    <h2>5. Data Retention</h2>
-    <p>Your USTA NorCal credentials are stored locally on your device. You can remove them at any time by logging out of the app or deleting the app.</p>
+    <h2>Product analytics</h2>
 
-    <h2>6. Children's Privacy</h2>
-    <p>The app is not directed at children under 13 and does not knowingly collect personal information from children.</p>
+    <p>Release builds on physical devices send first-party product analytics through the Net Results API to Elasticsearch. Debug and simulator builds do not send this telemetry. Analytics includes event time, app version and build, subscription mode, anonymous feature interactions, selected app settings, aggregate search and lineup-planner counts, ad or purchase event outcomes, and a random session ID with session duration. The session ID correlates activity only within one app activation and is not reused as an account or device identity.</p>
 
-    <h2>7. Changes to This Policy</h2>
-    <p>This policy may be updated from time to time. The "Last updated" date at the top of this page reflects the most recent revision. Continued use of the app after changes constitutes acceptance of the updated policy.</p>
+    <p>First-party analytics does not include USTA or UTR account identifiers, login identifiers, names, email addresses, search text, player or profile identities, selected-result identities, team or match identifiers or names, or device or player location. The API accepts telemetry only through an event and property allowlist and discards unknown fields sent by older app releases before writing an analytics document. First-party analytics are not used for tracking across other companies&#39; apps or websites.</p>
 
-    <h2>8. Contact</h2>
-    <p>If you have questions about this privacy policy, please open an issue at <a href="http://github.com/ycombinator/gsl/issues" target="_blank">github.com/ycombinator/gsl</a>.</p>
+    <h2>Ads and subscriptions</h2>
+
+    <p>The <a href="https://developers.google.com/admob/ios/privacy/data-disclosure" target="_blank" rel="noopener noreferrer">Google Mobile Ads SDK</a> is initialized on physical devices and is used to load and present interstitial ads. Google may process IP address and estimated general location, device or advertising identifiers, ads shown, ad and app interactions, crash logs, and performance data as part of providing, measuring, and protecting ads. The app submits Google&#39;s default ad request and does not itself set a non-personalized-ad flag. Net Results does not send venue ratings to Google. Once an active ad-free subscription has been verified, Net Results suppresses further ad loading and presentation, although the Google Mobile Ads SDK is still initialized when the app starts.</p>
+
+    <p>Subscriptions are purchased and verified through <a href="https://developer.apple.com/storekit/" target="_blank" rel="noopener noreferrer">Apple&#39;s StoreKit</a>. Apple processes the purchase. Net Results reads whether the ad-free entitlement is active and records the resulting <code>ads</code> or <code>paid</code> mode plus purchase or restore events in first-party analytics; it does not receive or store full payment-card details.</p>
+
+    <h2>Issue reports</h2>
+
+    <p>When you submit an in-app issue report, Net Results sends:</p>
+
+    <ul>
+      <li>your description, required email address, and optional name;</li>
+      <li>app version and build, device model, iOS version, locale, time zone, current screen, sign-in state, and relevant player, team, match, or other screen identifiers, plus recent nearby-sharing technical error details when available;</li>
+      <li>an optional network trace covering API activity on the screen before you opened the report, if “Include network activity” is on; and</li>
+      <li>the screen capture taken when you opened the report, unless you turn off “Include screenshot.”</li>
+    </ul>
+
+    <p>Network-trace inclusion is on by default when captured activity is available. The report sheet explains the categories of data the trace may contain before you send the report. You can turn off “Include network activity”; when the control is off, the trace is not sent.</p>
+
+    <p>The network trace can contain request URLs and query values, request bodies, response data, and the player or team information used on that screen. It omits authorization, cookie, token, and secret headers and redacts JSON fields whose names indicate passwords, tokens, cookies, or secrets. This reduces exposure but does not make the trace anonymous. Do not include passwords, authentication codes, or other sensitive information in the description or screenshot.</p>
+
+    <p>Reports are sent through the Net Results API and created as issues in the private Net Results GitHub repository. Screenshots and network traces are stored as private repository assets for troubleshooting. The API also uses the requesting IP address temporarily in memory to limit report submissions; the IP address is not included in the GitHub issue.</p>
+
+    <h2>Information stored on the device</h2>
+
+    <p>In addition to account and session information described above, Net Results stores:</p>
+
+    <ul>
+      <li>API responses on disk, which can contain the tennis data displayed in the app;</li>
+      <li>up to ten recently selected player or team searches, including their IDs and displayed profile or team details;</li>
+      <li>display settings and whether UTR sign-in was skipped; and</li>
+      <li>a random notification installation identifier in Keychain when notifications are enabled; and</li>
+      <li>active or pending analytics-session events until they are successfully sent.</li>
+    </ul>
+
+    <p>Cached API responses expire automatically, and the app removes expired, unreadable, and older entries to keep the on-device cache bounded. UTR rating responses expire after no more than 30 minutes and are removed when the UTR session is replaced or cleared. Recent searches can be removed from the recent-search list, account sessions can be removed by signing out, and saved credentials can be removed by turning off Face ID for the account.</p>
+
+    <h2>Information you choose to share</h2>
+
+    <p>Nearby lineup sharing uses an encrypted local Wi-Fi or Bluetooth connection. While you are signed in and the app is open in the foreground, your signed-in player name and gender are advertised to nearby Net Results users so they can identify you; a generic device label is used if the player name is unavailable. A sender first shares short-lived match, sender, and target-team identifiers so the app can verify that the signed-in recipient plays on the opposing team before showing an approval prompt. The lineup is sent only after the recipient approves. A completed lineup share contains the lineup, sender and target team IDs, sender USTA player ID, match ID and date, and short-lived transfer identifiers and timestamps used to reject duplicate or expired transfers. Accepted lineups remain in app memory for the current account and are cleared when the account changes, the user signs out, or the app closes. Sending a lineup through Messages passes the lineup text to Apple&#39;s Messages composer. Captain and co-captain drafts can be pre-addressed to the opposing captain and co-captain. The More option passes only the lineup text to the iOS share sheet and the destination you choose, such as Mail, AirDrop, a third-party app, or Copy.</p>
+
+    <p>Calendar features ask for Calendar access only when you choose the calendar action or tap a match date. With your permission, the app reads and displays events from the selected match day on your device so you can see whether the match fits your schedule. When you export upcoming matches from a player profile, the app also reads events that overlap those matches so it can show schedule conflicts before importing anything. Existing calendar events are never changed or deleted during this export. Calendar event titles, times, locations, notes, and other event details are not sent to the Net Results API or analytics. The app can add or update match events using the selected team&#39;s opponent, schedule, notes, and venue details. A match without a known time can be added as an all-day event. The app stores the corresponding calendar event identifiers on your device so it can recognize existing matches and update them when a schedule changes. It also embeds a Net Results match identifier in added events so it can recognize them if the app&#39;s local settings are reset; those identifiers are not sent to the Net Results API. Events are handled by Apple and your chosen calendar account under their privacy practices.</p>
+
+    <h2>Service providers and retention</h2>
+
+    <p>Net Results relies on Render for API hosting, Valkey for temporary response caching, Elasticsearch for venue ratings, reminder and lineup-confirmation delivery records, consent records, and analytics, Telnyx for transactional SMS, Resend for venue-review moderation emails, GitHub for private issue reports, Google Mobile Ads for advertising, Apple for notifications, subscriptions, Maps geocoding, WeatherKit forecasts, and system sharing, and the other tennis-data and geocoding services described above. Those providers may receive normal connection information such as IP address and request metadata and process it under their own terms.</p>
+
+    <p>The API&#39;s application log records a request ID, HTTP method, path, response status, and duration for operational troubleshooting. A path can contain a player, team, match, or venue ID. The request logger excludes query strings, cookies, and request bodies.</p>
+
+    <ul>
+      <li>Venue ratings are retained for three years after their most recent update.</li>
+      <li>Analytics events use a rolling one-year retention window. Elasticsearch automatically deletes older events through data stream lifecycle management.</li>
+      <li>Reminder delivery records are removed after 30 days. Signing out asks the API to deactivate that installation immediately. Active registrations not refreshed for 90 days are deactivated; inactive registration records are removed after a further 90 days. Account reminder preferences are retained so disabled reminders do not silently turn back on after a device or permission change.</li>
+      <li>Lineup-confirmation delivery jobs and Telnyx webhook-deduplication records are retained for 30 days. Completed, cancelled, and expired proposal records are retained for 90 days after their last update. SMS consent and opt-out records are retained while needed to honor the player&#39;s messaging choice and for up to four years after that choice is replaced or becomes inactive.</li>
+      <li>Submitted issue reports, including their metadata, screenshots, and network traces, are retained for two years after submission or until the corresponding private GitHub issue is resolved, whichever happens first.</li>
+    </ul>
+
+    <p>Cached tennis data expires or is evicted as described above. App Store privacy disclosures and this policy should be reviewed whenever these data flows or a third-party SDK changes.</p>
+    <!-- END GENERATED PRIVACY POLICY -->
   </div>
 
   <footer>
