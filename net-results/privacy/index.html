@@ -50,9 +50,9 @@
 
   <div class="content">
     <!-- BEGIN GENERATED PRIVACY POLICY: net-results-app/PRIVACY.md -->
-    <h1>Privacy Policy</h1>
+    <h1>Net Results Privacy</h1>
 
-    <p class="updated">Last updated: August 24, 2026</p>
+    <p class="updated">Last updated: August 23, 2026</p>
 
     <p>Net Results is a companion app for USTA NorCal league players. This policy describes the information the app handles, where it is stored, and when it is sent to the Net Results service or another service.</p>
 
@@ -90,18 +90,6 @@
 
     <p>Net Results sends Apple the APNs token, notification text, and the player, team, and match routing identifiers needed to open the relevant screen. Apple processes this information to deliver the notification. Depending on your iOS settings, notification text may appear on the Lock Screen or other system surfaces. You can turn each reminder type off in Net Results Settings or change all notification access in iOS Settings.</p>
 
-    <h2>Lineup confirmations and text messages</h2>
-
-    <p>When a captain or co-captain chooses <strong>Ask for Confirmations</strong>, the Net Results API uses that captain&#39;s current USTA session to verify their role and retrieve the team roster/contact page. It processes the USTA player ID, player name, and phone number only for players in the proposed lineup. Roster phone numbers are not added to public team data, returned to the iOS app, placed in the shared Valkey response cache, or written to application logs or issue-report network traces.</p>
-
-    <p>Net Results stores the proposed lineup, match and team display details, captain/co-captain and participant player IDs, each participant&#39;s pending, confirmed, or declined response, response channel and actor, proposal revision and lifecycle, and related timestamps in Elasticsearch. It stores a keyed, non-reversible phone fingerprint with the proposal so an inbound text response can be matched without indexing the roster phone number. A delivery outbox can temporarily contain the raw destination phone number and message text so a failed delivery can be retried; those fields are not indexed or logged.</p>
-
-    <p>A player is treated as having the app for this workflow when at least one active APNs registration was seen in the previous 21 days. Net Results sends the confirmation request to each qualifying device. When there is no qualifying device, or every qualifying APNs token is rejected as invalid, Net Results may send the request by SMS through Telnyx when a valid USTA-listed phone number is available.</p>
-
-    <p>The first confirmation-request SMS to a player/phone combination includes the SMS consent disclosure. Replying <code>C</code> or <code>D</code> both records consent to Net Results transactional lineup-confirmation texts and confirms or declines that lineup. Until one of those replies is received, Net Results does not send another automated confirmation request to that number. A consent record contains the player ID, keyed phone fingerprint, disclosure version, current consent or opt-out state, and consent-related timestamps. Telnyx processes the destination number, SMS content, delivery status, and inbound reply. Standard message and data rates may apply. Reply <code>STOP</code> to opt out or <code>HELP</code> for help; Telnyx&#39;s messaging profile enforces those commands.</p>
-
-    <p>Confirmation-request pushes open a read-only proposal where the participant can confirm or decline. Captain-update pushes open the corresponding Custom lineup. Notification text can appear on Apple system surfaces according to the device&#39;s notification settings.</p>
-
     <h2>Venue ratings</h2>
 
     <p>When you submit a match-venue rating, Net Results stores:</p>
@@ -121,9 +109,9 @@
 
     <h2>Product analytics</h2>
 
-    <p>Release builds on physical devices send first-party product analytics through the Net Results API to Elasticsearch. Debug and simulator builds do not send this telemetry. Analytics includes event time, app version and build, subscription mode, anonymous feature interactions, selected app settings, aggregate search and lineup-planner counts, ad or purchase event outcomes, and a random session ID with session duration. The session ID correlates activity only within one app activation and is not reused as an account or device identity.</p>
+    <p>Release builds on physical devices send first-party product analytics through the Net Results API to Elasticsearch. Debug and simulator builds do not send this telemetry. Analytics includes event time, app version and build, subscription mode, pseudonymous feature interactions, selected app settings, aggregate search and lineup-planner counts, ad or purchase event outcomes, and a random session ID with session duration. A separate random analytics installation identifier is included only when a session starts so Net Results can count unique active installations over time. It is stored in the app&#39;s ordinary on-device storage, is not associated with USTA or UTR accounts or the notification installation identifier, and normally resets when the app is deleted. The session ID correlates activity only within one app activation and is not reused as an account or device identity.</p>
 
-    <p>First-party analytics does not include USTA or UTR account identifiers, login identifiers, names, email addresses, search text, player or profile identities, selected-result identities, team or match identifiers or names, or device or player location. The API accepts telemetry only through an event and property allowlist and discards unknown fields sent by older app releases before writing an analytics document. First-party analytics are not used for tracking across other companies&#39; apps or websites.</p>
+    <p>First-party analytics does not include USTA or UTR account identifiers, login identifiers, names, email addresses, search text, player or profile identities, selected-result identities, team or match identifiers or names, or device or player location. The API accepts telemetry only through an event and property allowlist and discards unknown fields sent by older app releases before writing an analytics document. The analytics installation identifier is not sent to Google Mobile Ads or combined with data from other companies. First-party analytics are not used for tracking across other companies&#39; apps or websites.</p>
 
     <h2>Ads and subscriptions</h2>
 
@@ -155,7 +143,8 @@
     <ul>
       <li>API responses on disk, which can contain the tennis data displayed in the app;</li>
       <li>up to ten recently selected player or team searches, including their IDs and displayed profile or team details;</li>
-      <li>display settings and whether UTR sign-in was skipped; and</li>
+      <li>display settings and whether UTR sign-in was skipped;</li>
+      <li>a random analytics installation identifier in ordinary app storage;</li>
       <li>a random notification installation identifier in Keychain when notifications are enabled; and</li>
       <li>active or pending analytics-session events until they are successfully sent.</li>
     </ul>
@@ -170,7 +159,7 @@
 
     <h2>Service providers and retention</h2>
 
-    <p>Net Results relies on Render for API hosting, Valkey for temporary response caching, Elasticsearch for venue ratings, reminder and lineup-confirmation delivery records, consent records, and analytics, Telnyx for transactional SMS, Resend for venue-review moderation emails, GitHub for private issue reports, Google Mobile Ads for advertising, Apple for notifications, subscriptions, Maps geocoding, WeatherKit forecasts, and system sharing, and the other tennis-data and geocoding services described above. Those providers may receive normal connection information such as IP address and request metadata and process it under their own terms.</p>
+    <p>Net Results relies on Render for API hosting, Valkey for temporary response caching, Elasticsearch for venue ratings, reminder delivery records, and analytics, Resend for venue-review moderation emails, GitHub for private issue reports, Google Mobile Ads for advertising, Apple for notifications, subscriptions, Maps geocoding, WeatherKit forecasts, and system sharing, and the other tennis-data and geocoding services described above. Those providers may receive normal connection information such as IP address and request metadata and process it under their own terms.</p>
 
     <p>The API&#39;s application log records a request ID, HTTP method, path, response status, and duration for operational troubleshooting. A path can contain a player, team, match, or venue ID. The request logger excludes query strings, cookies, and request bodies.</p>
 
@@ -178,7 +167,6 @@
       <li>Venue ratings are retained for three years after their most recent update.</li>
       <li>Analytics events use a rolling one-year retention window. Elasticsearch automatically deletes older events through data stream lifecycle management.</li>
       <li>Reminder delivery records are removed after 30 days. Signing out asks the API to deactivate that installation immediately. Active registrations not refreshed for 90 days are deactivated; inactive registration records are removed after a further 90 days. Account reminder preferences are retained so disabled reminders do not silently turn back on after a device or permission change.</li>
-      <li>Lineup-confirmation delivery jobs and Telnyx webhook-deduplication records are retained for 30 days. Completed, cancelled, and expired proposal records are retained for 90 days after their last update. SMS consent and opt-out records are retained while needed to honor the player&#39;s messaging choice and for up to four years after that choice is replaced or becomes inactive.</li>
       <li>Submitted issue reports, including their metadata, screenshots, and network traces, are retained for two years after submission or until the corresponding private GitHub issue is resolved, whichever happens first.</li>
     </ul>
 
