@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#180a04">
+  <title>Net Results app QR code · TServe Labs</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #180a04;
+      color: #faf5ee;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 32px 20px; }
+    main { width: min(100%, 520px); text-align: center; }
+    h1 { margin: 0 0 12px; color: #c9e52a; font-size: clamp(1.6rem, 5vw, 2.2rem); }
+    p { margin: 0 auto 24px; color: rgba(250,245,238,.72); line-height: 1.5; }
+    .qr-card { display: inline-block; padding: 20px; background: #fff; border-radius: 16px; }
+    .qr-card img { display: block; width: min(100%, 440px); height: auto; image-rendering: pixelated; }
+    a { display: inline-block; margin-top: 20px; color: #c9e52a; text-decoration: none; }
+    a:hover { opacity: .82; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Explore the Net Results app</h1>
+    <p>Scan this QR code to visit the Net Results app page.</p>
+    <div class="qr-card">
+      <img src="qr.svg" alt="QR code linking to https://tservelabs.com/net-results/" width="1080" height="1080">
+    </div>
+    <a href="https://tservelabs.com/net-results/">Visit the Net Results app page</a>
+  </main>
+</body>
+</html>
