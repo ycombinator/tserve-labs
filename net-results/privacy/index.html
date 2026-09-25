@@ -28,15 +28,18 @@
   <script>
   (function(){var c=document.getElementById('sf'),x=c.getContext('2d');
   function draw(){c.width=innerWidth;c.height=innerHeight;
-  var w=Math.min(c.width*0.65,480),h=w*2.18,l=(c.width-w)/2,t=(c.height-h)/2,s=w*0.115;
-  x.strokeStyle='rgba(255,230,200,0.055)';x.lineWidth=1.5;
-  x.strokeRect(l,t,w,h);
-  x.beginPath();x.moveTo(l,t+h/2);x.lineTo(l+w,t+h/2);x.stroke();
-  x.beginPath();x.moveTo(l+s,t);x.lineTo(l+s,t+h);x.stroke();
-  x.beginPath();x.moveTo(l+w-s,t);x.lineTo(l+w-s,t+h);x.stroke();
-  x.beginPath();x.moveTo(l+s,t+h/2-h*0.21);x.lineTo(l+w-s,t+h/2-h*0.21);x.stroke();
-  x.beginPath();x.moveTo(l+s,t+h/2+h*0.21);x.lineTo(l+w-s,t+h/2+h*0.21);x.stroke();
-  x.beginPath();x.moveTo(l+w/2,t+h/2-h*0.21);x.lineTo(l+w/2,t+h/2+h*0.21);x.stroke();}
+  var w=Math.min(c.width*0.65,480),h=w*(78/36),l=(c.width-w)/2,t=(c.height-h)/2,
+      a=w*(4.5/36),d=w*(21/36),m=w*((4/12)/36),cx=l+w/2,cy=t+h/2,
+      lineWidth=Math.max(1.5,w/288),centerWidth=Math.max(2,w/216);
+  function line(x1,y1,x2,y2,width){x.lineWidth=width;x.beginPath();x.moveTo(x1,y1);x.lineTo(x2,y2);x.stroke();}
+  x.strokeStyle='rgba(255,230,200,0.055)';
+  line(l,t,l,t+h,lineWidth);line(l+w,t,l+w,t+h,lineWidth);
+  line(l,t,l+w,t,centerWidth);line(l,t+h,l+w,t+h,centerWidth);
+  line(l+a,t,l+a,t+h,lineWidth);line(l+w-a,t,l+w-a,t+h,lineWidth);
+  line(l,cy,l+w,cy,lineWidth);
+  line(l+a,cy-d,l+w-a,cy-d,lineWidth);line(l+a,cy+d,l+w-a,cy+d,lineWidth);
+  line(cx,cy-d,cx,cy+d,centerWidth);
+  line(cx,t,cx,t+m,centerWidth);line(cx,t+h,cx,t+h-m,centerWidth);}
   draw();addEventListener('resize',draw);})();
   </script>
 
