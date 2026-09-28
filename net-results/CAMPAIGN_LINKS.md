@@ -18,11 +18,11 @@ identity or contact information in either value.
 
 ## App Store Connect setup
 
-In App Store Connect, open Net Results > Analytics > Acquisition > Campaigns
-and create a campaign link. Copy its numeric provider token (`pt`) into the
-badge's `data-provider-token` attribute in `index.html`. Apple requires both
-`pt` and `ct` for campaign reporting. The provider token stays the same for
-future campaigns; the page generates each campaign token from the landing URL.
+The `net_results_site` campaign link generated provider token (`pt`)
+`128653198`, which is configured on the badge in `index.html`. Apple requires
+both `pt` and `ct` for campaign reporting. The provider token stays the same
+for future campaigns; the page generates each campaign token from the landing
+URL. The bootstrap campaign name does not need to match those generated tokens.
 
 Apple reports the combined token as one campaign dimension. It cannot filter
 `utm_source` and `utm_campaign` independently. For source or campaign totals
