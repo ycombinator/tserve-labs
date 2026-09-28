@@ -59,16 +59,10 @@
 
     .app-store-btn {
       display: inline-block;
-      background: var(--green);
-      color: #000;
-      font-weight: 600;
-      font-size: 1em;
-      padding: 14px 32px;
-      border-radius: 50px;
       text-decoration: none;
-      transition: opacity 0.2s;
     }
-    .app-store-btn:hover { opacity: 0.85; }
+    .app-store-btn img { display: block; width: 150px; height: auto; }
+    .app-store-btn:focus-visible { outline: 2px solid var(--green); outline-offset: 5px; }
 
     /* ── FEATURE CAROUSEL ── */
     .feature-carousel {
@@ -473,7 +467,7 @@
     <div class="badge">iOS App</div>
     <h1>Your USTA league season.<br><span>In your pocket.</span></h1>
     <p>Search players, teams, and league rules. Compare TennisRecord and UTR ratings. Plan your best lineups. And much more.</p>
-    <a href="https://apps.apple.com/us/app/net-results/id6760581696" class="app-store-btn">Download on the App Store</a>
+    <a href="https://apps.apple.com/us/app/net-results/id6760581696" class="app-store-btn" data-provider-token=""><img src="images/app-store-badge.svg" alt="Download on the App Store" width="150" height="50"></a>
   </section>
 
   <!-- FEATURE CAROUSEL -->
@@ -791,11 +785,34 @@
   <!-- FOOTER -->
   <footer>
     <p><em>Net Results is an independent app and is not affiliated with or endorsed by USTA.</em></p>
+    <p>Apple and the Apple logo are trademarks of Apple Inc., registered in the U.S. and other countries.</p>
     <p style="margin-top: 8px;">
       <a href="privacy/">Privacy Policy</a> &nbsp;·&nbsp;
       <a href="https://github.com/ycombinator/net-results-app/issues">Support</a>
     </p>
   </footer>
+
+  <script>
+  (function () {
+    var downloadLink = document.querySelector('.app-store-btn');
+    if (!downloadLink) return;
+
+    var landingParams = new URLSearchParams(window.location.search);
+    var source = landingParams.get('utm_source');
+    var campaign = landingParams.get('utm_campaign');
+    if (!source && !campaign) return;
+
+    // Apple reports one campaign token. Use short UTM values so the pair fits.
+    var token = [source, campaign].filter(Boolean).join('__');
+    if (!/^[A-Za-z0-9_-]{1,30}$/.test(token)) return;
+
+    var appStoreURL = new URL(downloadLink.href);
+    appStoreURL.searchParams.set('ct', token);
+    var providerToken = downloadLink.dataset.providerToken;
+    if (providerToken) appStoreURL.searchParams.set('pt', providerToken);
+    downloadLink.href = appStoreURL.toString();
+  })();
+  </script>
 
   <script>
   (function () {
