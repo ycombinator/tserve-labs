@@ -1,0 +1,25 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "345V534PF4.io.github.ycombinator.NetResults"
+        ],
+        "components": [
+          {
+            "/": "/net-results/app/open/v1/player/"
+          },
+          {
+            "/": "/net-results/app/open/v1/team/"
+          },
+          {
+            "/": "/net-results/app/open/v1/match/"
+          },
+          {
+            "/": "/net-results/app/open/v1/notification/"
+          }
+        ]
+      }
+    ]
+  }
+}
