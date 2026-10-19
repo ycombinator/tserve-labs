@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.tservelabs.netresults",
+      "sha256_cert_fingerprints": [
+        "77:3E:53:E0:FA:48:62:1C:1E:13:B8:1B:47:E5:AD:13:D3:04:2D:CE:01:83:1F:BA:0B:E8:32:F8:C7:BF:42:C4"
+      ]
+    }
+  }
+]
